@@ -1,6 +1,6 @@
 import React from "react";
 
-function Post({ userName, userPic, date, postText, postPic, like, dislike }) {
+function Post({ userName, userPic, date, postText, postPic, like}) {
   return (
     <div className="post-visible">
       <div className="user">

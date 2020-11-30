@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import Post from "./Post";
 import Comments from "./Comments";
 import { Context } from "../DataContext";
@@ -9,7 +9,7 @@ function Feeds() {
   return (
     <div>
       {feed.map((post) => (
-        <>
+        <Fragment key={post.id}>
           <Post
             key={post.id}
             userName={post.userName}
@@ -20,9 +20,9 @@ function Feeds() {
             like={post.like}
             postLike={post.postLike}
           />
-          {post.comments.map((comment, index) => (
+          {post.comments.map((comment) => (
             <Comments
-              key={comment[index]}
+              key={comment.id}
               author={comment.commentorName}
               authorPic={comment.commentorPic}
               authorText={comment.text}
@@ -33,7 +33,7 @@ function Feeds() {
             <input type="text" placeholder="Add a comment..." />
           </form>
           <hr></hr>
-        </>
+        </Fragment>
       ))}
     </div>
   );
