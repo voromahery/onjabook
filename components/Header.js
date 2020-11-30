@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import kaneki from "../kaneki.jpg";
 
 function Header() {
   return (
@@ -21,7 +20,7 @@ function Header() {
           <span>Daniel</span>
         </Link>
         <Link to="/user">
-          <img src={kaneki} className="user-pic" alt="" />
+          <img src="https://portfolio-onja-daniel.netlify.app/images/daniel.jpg" className="user-pic" alt="" />
         </Link>
       </div>
     </header>

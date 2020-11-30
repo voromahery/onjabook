@@ -33853,9 +33853,7 @@ if ("development" !== "production") {
     style: _propTypes.default.object
   });
 }
-},{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"kaneki.jpg":[function(require,module,exports) {
-module.exports = "/kaneki.a5ed320d.jpg";
-},{}],"components/Header.js":[function(require,module,exports) {
+},{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"components/Header.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33866,8 +33864,6 @@ exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
 
 var _reactRouterDom = require("react-router-dom");
-
-var _kaneki = _interopRequireDefault(require("../kaneki.jpg"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33891,7 +33887,7 @@ function Header() {
   }, /*#__PURE__*/_react.default.createElement("span", null, "Daniel")), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/user"
   }, /*#__PURE__*/_react.default.createElement("img", {
-    src: _kaneki.default,
+    src: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
     className: "user-pic",
     alt: ""
   }))));
@@ -33899,7 +33895,7 @@ function Header() {
 
 var _default = Header;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../kaneki.jpg":"kaneki.jpg"}],"post-list.json":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"post-list.json":[function(require,module,exports) {
 module.exports = [{
   "id": 1606722795986,
   "userPic": "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
@@ -33985,56 +33981,41 @@ var Context = _react.default.createContext();
 exports.Context = Context;
 
 function ContextProvider(props) {
-  var _useState = (0, _react.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      feeds = _useState2[0],
-      setFeed = _useState2[1];
-
   var _useReducer = (0, _react.useReducer)(function (state, action) {
     switch (action.type) {
-      case "LOADING":
-        return _objectSpread(_objectSpread({}, state), {}, {
-          loading: true
-        });
-
-      case "RESPONSE":
+      case "POST":
         {
           return _objectSpread(_objectSpread({}, state), {}, {
-            loading: false,
-            response: action.response
+            feed: action.feed
+          });
+        }
+
+      case "COMMENT":
+        {
+          return _objectSpread(_objectSpread({}, state), {}, {
+            newComment: action.newComment
           });
         }
     }
   }, {
-    loading: false,
-    response: []
+    feed: [],
+    newComment: ''
   }),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       state = _useReducer2[0],
       dispatch = _useReducer2[1];
 
   (0, _react.useEffect)(function () {
-    var isLoading = true;
     dispatch({
-      type: "LOADING"
+      type: "POST",
+      feed: _postList.default
     });
-
-    if (isLoading) {
-      dispatch({
-        type: "RESPONSE",
-        response: _postList.default
-      });
-    }
-
-    return function () {
-      isLoading = false, setFeed(state.response);
-    };
   }, []);
-  console.log(feeds);
+  console.log(state.feed);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
-      feed: state.response,
-      setFeed: setFeed
+      feed: state.feed,
+      dispatch: dispatch
     }
   }, props.children));
 }
@@ -34157,7 +34138,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function Feeds() {
   var _useContext = (0, _react.useContext)(_DataContext.Context),
-      feed = _useContext.feed;
+      feed = _useContext.feed,
+      dispatch = _useContext.dispatch;
 
   var _useState = (0, _react.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
@@ -34203,7 +34185,13 @@ function Feeds() {
       className: "comment-form"
     }, /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
-      placeholder: "Add a comment..."
+      placeholder: "Add a comment...",
+      onChange: function onChange(e) {
+        dispatch({
+          type: "COMMENT",
+          value: e.target.value
+        });
+      }
     })), /*#__PURE__*/_react.default.createElement("hr", null));
   }));
 }

@@ -4,7 +4,7 @@ import Comments from "./Comments";
 import { Context } from "../DataContext";
 
 function Feeds() {
-  const { feed } = useContext(Context);
+  const { feed, dispatch } = useContext(Context);
 
   const [likePost, setLikePost] = useState(0);
   function likeFunction(e) {
@@ -42,7 +42,13 @@ function Feeds() {
             />
           ))}
           <form className="comment-form">
-            <input type="text" placeholder="Add a comment..." />
+            <input
+              type="text"
+              placeholder="Add a comment..."
+              onChange={(e) => {
+                dispatch({ type: "COMMENT", value: e.target.value });
+              }}
+            />
           </form>
           <hr></hr>
         </Fragment>
