@@ -20,18 +20,22 @@ header {
   border-radius: 50%;
 }
 .new-post,
-form {
+.form-add {
   max-width: 446px;
   margin: auto;
 }
 
-form {
+.form-add {
   display: grid;
 }
 
 label {
   display: flex;
   align-items: center;
+}
+
+.label-text {
+  flex-basis: 30%;
 }
 
 input {
@@ -49,6 +53,24 @@ button {
 textarea {
   max-width: 446px;
   min-height: 95px;
+}
+
+/*////////////////////////////*/
+.dislike-button,
+.like-button {
+  max-width: 60px;
+}
+
+/*/////////////////////////////*/
+.post-visible,
+.comments,
+.comment-form,
+hr  {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 @media (min-width: 360px) {

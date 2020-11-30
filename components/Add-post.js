@@ -1,15 +1,16 @@
 import React from "react";
 function AddPost() {
+
   return (
     <div className="new-post">
       <h3>New post :</h3>
-      <form>
+      <form className="form-add">
         <textarea placeholder="Say what’s on your mind..." />
         <label>
-          <span>Picture url :</span>
+          <span className="label-text">Picture url :</span>
           <input type="url" />
         </label>
-        <button class="post-button">Post</button>
+        <button className="post-button">Post</button>
       </form>
     </div>
   );
