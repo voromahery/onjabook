@@ -33899,78 +33899,7 @@ function Header() {
 
 var _default = Header;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../kaneki.jpg":"kaneki.jpg"}],"components/Post.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Post(_ref) {
-  var userName = _ref.userName,
-      userPic = _ref.userPic,
-      date = _ref.date,
-      postText = _ref.postText,
-      postPic = _ref.postPic,
-      like = _ref.like;
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "post-visible"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "user"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "user"
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: userPic,
-    alt: userName,
-    className: "user-pic"
-  }), /*#__PURE__*/_react.default.createElement("span", null, userName)), /*#__PURE__*/_react.default.createElement("span", null, date)), /*#__PURE__*/_react.default.createElement("article", null, /*#__PURE__*/_react.default.createElement("p", null, postText), /*#__PURE__*/_react.default.createElement("img", {
-    src: postPic,
-    alt: "post"
-  })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
-    className: "like-button"
-  }, "Like"), /*#__PURE__*/_react.default.createElement("span", null, like)));
-}
-
-var _default = Post;
-exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"components/Comments.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Comments(_ref) {
-  var author = _ref.author,
-      authorPic = _ref.authorPic,
-      authorText = _ref.authorText,
-      authorDate = _ref.authorDate;
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "comments"
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "user"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "user"
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: authorPic,
-    alt: author,
-    className: "user-pic"
-  }), /*#__PURE__*/_react.default.createElement("span", null, author)), /*#__PURE__*/_react.default.createElement("span", null, authorDate)), /*#__PURE__*/_react.default.createElement("p", null, authorText)));
-}
-
-var _default = Comments;
-exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"post-list.json":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../kaneki.jpg":"kaneki.jpg"}],"post-list.json":[function(require,module,exports) {
 module.exports = [{
   "id": 1606722795986,
   "userPic": "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
@@ -34109,7 +34038,90 @@ function ContextProvider(props) {
     }
   }, props.children));
 }
-},{"react":"node_modules/react/index.js","./post-list.json":"post-list.json"}],"components/Feeds.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./post-list.json":"post-list.json"}],"components/Post.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _DataContext = require("../DataContext");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function Post(_ref) {
+  var userName = _ref.userName,
+      userPic = _ref.userPic,
+      date = _ref.date,
+      postText = _ref.postText,
+      postPic = _ref.postPic,
+      like = _ref.like,
+      id = _ref.id,
+      likeFunction = _ref.likeFunction;
+
+  var _useContext = (0, _react.useContext)(_DataContext.Context),
+      feed = _useContext.feed;
+
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "post-visible"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "user"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "user"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: userPic,
+    alt: userName,
+    className: "user-pic"
+  }), /*#__PURE__*/_react.default.createElement("span", null, userName)), /*#__PURE__*/_react.default.createElement("span", null, date)), /*#__PURE__*/_react.default.createElement("article", null, /*#__PURE__*/_react.default.createElement("p", null, postText), /*#__PURE__*/_react.default.createElement("img", {
+    src: postPic,
+    alt: "post"
+  })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+    className: "like-button",
+    id: id,
+    onClick: likeFunction
+  }, "Like"), /*#__PURE__*/_react.default.createElement("span", null, like)));
+}
+
+var _default = Post;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../DataContext":"DataContext.js"}],"components/Comments.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Comments(_ref) {
+  var author = _ref.author,
+      authorPic = _ref.authorPic,
+      authorText = _ref.authorText,
+      authorDate = _ref.authorDate;
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "comments"
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "user"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "user"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: authorPic,
+    alt: author,
+    className: "user-pic"
+  }), /*#__PURE__*/_react.default.createElement("span", null, author)), /*#__PURE__*/_react.default.createElement("span", null, authorDate)), /*#__PURE__*/_react.default.createElement("p", null, authorText)));
+}
+
+var _default = Comments;
+exports.default = _default;
+},{"react":"node_modules/react/index.js"}],"components/Feeds.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34131,9 +34143,37 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function Feeds() {
   var _useContext = (0, _react.useContext)(_DataContext.Context),
       feed = _useContext.feed;
+
+  var _useState = (0, _react.useState)(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      likePost = _useState2[0],
+      setLikePost = _useState2[1];
+
+  function likeFunction(e) {
+    var buttonId = Number(e.target.id);
+    var findPost = feed.find(function (post) {
+      return post.id === buttonId;
+    });
+
+    if (findPost) {
+      setLikePost(findPost.like++);
+    }
+  }
 
   console.log(feed);
   return /*#__PURE__*/_react.default.createElement("div", null, feed.map(function (post) {
@@ -34141,16 +34181,19 @@ function Feeds() {
       key: post.id
     }, /*#__PURE__*/_react.default.createElement(_Post.default, {
       key: post.id,
+      id: post.id,
       userName: post.userName,
       userPic: post.userPic,
       postText: post.description,
       date: post.date,
       postPic: post.postPic,
       like: post.like,
-      postLike: post.postLike
+      postLike: post.postLike,
+      likeFunction: likeFunction
     }), post.comments.map(function (comment) {
       return /*#__PURE__*/_react.default.createElement(_Comments.default, {
         key: comment.id,
+        id: comment.id,
         author: comment.commentorName,
         authorPic: comment.commentorPic,
         authorText: comment.text,

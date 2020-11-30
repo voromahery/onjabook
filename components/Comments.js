@@ -1,6 +1,7 @@
 import React from "react";
 
 function Comments({ author, authorPic, authorText, authorDate }) {
+
   return (
     <div className="comments">
       <div>

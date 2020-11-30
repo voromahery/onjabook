@@ -1,6 +1,9 @@
-import React from "react";
+import React, {useContext, useState} from "react";
+import { Context } from "../DataContext";
 
-function Post({ userName, userPic, date, postText, postPic, like}) {
+function Post({ userName, userPic, date, postText, postPic, like, id, likeFunction }) {
+  const {feed} = useContext(Context);
+
   return (
     <div className="post-visible">
       <div className="user">
@@ -15,7 +18,7 @@ function Post({ userName, userPic, date, postText, postPic, like}) {
         <img src={postPic} alt="post" />
       </article>
       <div>
-        <button className="like-button">Like</button>
+        <button className="like-button" id={id} onClick={likeFunction}>Like</button>
         <span>{like}</span>
       </div>
     </div>
