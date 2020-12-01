@@ -12,6 +12,18 @@ function ContextProvider(props) {
             feed: action.feed,
           };
         }
+        // case "ADD": {
+        //   return {
+        //   id: Date.now(),
+        //     description:,
+        //     postPic: ,
+        //     userName: ,
+        //     userPic: ,
+        //     comments: ,
+        //     date: ,
+        //     like: ,
+        //   }
+        // }
         case "COMMENT": {
           return {
             ...state,

@@ -57,7 +57,8 @@ textarea {
 
 /*////////////////////////////*/
 .dislike-button,
-.like-button {
+.like-button,
+.post-comment {
   max-width: 60px;
 }
 

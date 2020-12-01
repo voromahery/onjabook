@@ -33989,6 +33989,18 @@ function ContextProvider(props) {
             feed: action.feed
           });
         }
+      // case "ADD": {
+      //   return {
+      //   id: Date.now(),
+      //     description:,
+      //     postPic: ,
+      //     userName: ,
+      //     userPic: ,
+      //     comments: ,
+      //     date: ,
+      //     like: ,
+      //   }
+      // }
 
       case "COMMENT":
         {
@@ -34141,10 +34153,15 @@ function Feeds() {
       feed = _useContext.feed,
       dispatch = _useContext.dispatch;
 
-  var _useState = (0, _react.useState)(0),
+  var _useState = (0, _react.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
-      likePost = _useState2[0],
-      setLikePost = _useState2[1];
+      newComment = _useState2[0],
+      setNewComment = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      likePost = _useState4[0],
+      setLikePost = _useState4[1];
 
   function likeFunction(e) {
     var buttonId = Number(e.target.id);
@@ -34157,7 +34174,18 @@ function Feeds() {
     }
   }
 
-  console.log(feed);
+  function handleComment(e) {
+    e.preventDefault(); // dispatch({[]})
+
+    var comment = feed.map(function (post) {
+      [post.comment, {
+        new: newComment
+      }];
+    });
+    console.log(comment);
+    console.log("Yes");
+  }
+
   return /*#__PURE__*/_react.default.createElement("div", null, feed.map(function (post) {
     return /*#__PURE__*/_react.default.createElement(_react.Fragment, {
       key: post.id
@@ -34182,7 +34210,8 @@ function Feeds() {
         authorDate: comment.date
       });
     }), /*#__PURE__*/_react.default.createElement("form", {
-      className: "comment-form"
+      className: "comment-form",
+      onSubmit: handleComment
     }, /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
       placeholder: "Add a comment...",
@@ -34192,7 +34221,10 @@ function Feeds() {
           value: e.target.value
         });
       }
-    })), /*#__PURE__*/_react.default.createElement("hr", null));
+    }), /*#__PURE__*/_react.default.createElement("button", {
+      type: "submit",
+      className: "post-comment"
+    }, "Post")), /*#__PURE__*/_react.default.createElement("hr", null));
   }));
 }
 
@@ -34211,10 +34243,23 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function AddPost() {
+  function addNEwPost(e) {
+    e.preventDefault();
+    console.log("YEs"); // id: Date.now(),
+    //         description:,
+    //         postPic: ,
+    //         userName: ,
+    //         userPic: ,
+    //         comments: ,
+    //         date: ,
+    //         like: ,
+  }
+
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "new-post"
   }, /*#__PURE__*/_react.default.createElement("h3", null, "New post :"), /*#__PURE__*/_react.default.createElement("form", {
-    className: "form-add"
+    className: "form-add",
+    onSubmit: addNEwPost
   }, /*#__PURE__*/_react.default.createElement("textarea", {
     placeholder: "Say what\u2019s on your mind..."
   }), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("span", {
@@ -34327,7 +34372,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58810" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50214" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -6,7 +6,9 @@ import { Context } from "../DataContext";
 function Feeds() {
   const { feed, dispatch } = useContext(Context);
 
+  const [newComment, setNewComment] = useState("");
   const [likePost, setLikePost] = useState(0);
+
   function likeFunction(e) {
     const buttonId = Number(e.target.id);
     const findPost = feed.find((post) => post.id === buttonId);
@@ -14,7 +16,20 @@ function Feeds() {
       setLikePost(findPost.like++);
     }
   }
-  console.log(feed);
+
+  function handleComment(e) {
+    e.preventDefault();
+    // dispatch({[]})
+    let comment = feed.map((post) => {
+      [post.comment,
+      {
+        new: newComment
+      }]
+    });
+    console.log(comment);
+    console.log("Yes");
+  }
+
   return (
     <div>
       {feed.map((post) => (
@@ -41,7 +56,7 @@ function Feeds() {
               authorDate={comment.date}
             />
           ))}
-          <form className="comment-form">
+          <form className="comment-form" onSubmit={handleComment}>
             <input
               type="text"
               placeholder="Add a comment..."
@@ -49,6 +64,7 @@ function Feeds() {
                 dispatch({ type: "COMMENT", value: e.target.value });
               }}
             />
+            <button type="submit" className="post-comment">Post</button>
           </form>
           <hr></hr>
         </Fragment>
