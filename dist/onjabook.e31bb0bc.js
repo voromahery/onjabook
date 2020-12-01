@@ -33853,49 +33853,7 @@ if ("development" !== "production") {
     style: _propTypes.default.object
   });
 }
-},{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"components/Header.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _reactRouterDom = require("react-router-dom");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Header() {
-  return /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "OnjaBook"), /*#__PURE__*/_react.default.createElement("nav", {
-    className: "navigation"
-  }, /*#__PURE__*/_react.default.createElement("ul", {
-    className: "navigation-list"
-  }, /*#__PURE__*/_react.default.createElement("li", {
-    className: "list-item"
-  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/"
-  }, "Feed")), /*#__PURE__*/_react.default.createElement("li", {
-    className: "list-item"
-  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/post"
-  }, "Add a post")))), /*#__PURE__*/_react.default.createElement("div", {
-    className: "user"
-  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/user"
-  }, /*#__PURE__*/_react.default.createElement("span", null, "Daniel")), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/user"
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
-    className: "user-pic",
-    alt: ""
-  }))));
-}
-
-var _default = Header;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"post-list.json":[function(require,module,exports) {
+},{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"post-list.json":[function(require,module,exports) {
 module.exports = [{
   "id": 1606722795986,
   "userId": 21231,
@@ -34035,6 +33993,16 @@ function ContextProvider(props) {
       newComment = _useState6[0],
       setNewComment = _useState6[1];
 
+  var _useState7 = (0, _react.useState)({
+    userId: 211231,
+    likeId: 21,
+    userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
+    userName: "Daniel"
+  }),
+      _useState8 = _slicedToArray(_useState7, 2),
+      currentUser = _useState8[0],
+      setCurrentUser = _useState8[1];
+
   var _useReducer = (0, _react.useReducer)(function (state, action) {
     switch (action.type) {
       case "IDENTITY":
@@ -34102,11 +34070,62 @@ function ContextProvider(props) {
       setPostImage: setPostImage,
       newComment: newComment,
       setNewComment: setNewComment,
-      postDate: postDate
+      postDate: postDate,
+      currentUser: currentUser,
+      setCurrentUser: setCurrentUser
     }
   }, props.children));
 }
-},{"react":"node_modules/react/index.js","./post-list.json":"post-list.json","./userData.json":"userData.json"}],"components/Post.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./post-list.json":"post-list.json","./userData.json":"userData.json"}],"components/Header.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactRouterDom = require("react-router-dom");
+
+var _DataContext = require("../DataContext");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function Header() {
+  var _useContext = (0, _react.useContext)(_DataContext.Context),
+      currentUser = _useContext.currentUser;
+
+  return /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "OnjaBook"), /*#__PURE__*/_react.default.createElement("nav", {
+    className: "navigation"
+  }, /*#__PURE__*/_react.default.createElement("ul", {
+    className: "navigation-list"
+  }, /*#__PURE__*/_react.default.createElement("li", {
+    className: "list-item"
+  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/"
+  }, "Feed")), /*#__PURE__*/_react.default.createElement("li", {
+    className: "list-item"
+  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/post"
+  }, "Add a post")))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "user"
+  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/user"
+  }, /*#__PURE__*/_react.default.createElement("span", null, currentUser.userName)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/user"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: currentUser.userPic,
+    className: "user-pic",
+    alt: ""
+  }))));
+}
+
+var _default = Header;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../DataContext":"DataContext.js"}],"components/Post.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34162,32 +34181,18 @@ function Post(_ref) {
       post = _ref.post;
   return function (id, likeFunction) {
     var _useContext = (0, _react.useContext)(_DataContext.Context),
-        feed = _useContext.feed;
+        feed = _useContext.feed,
+        currentUser = _useContext.currentUser;
 
     var _useState = (0, _react.useState)(like.length),
         _useState2 = _slicedToArray(_useState, 2),
         likePost = _useState2[0],
         setLikePost = _useState2[1];
 
-    var _useState3 = (0, _react.useState)([]),
+    var _useState3 = (0, _react.useState)(post.like),
         _useState4 = _slicedToArray(_useState3, 2),
-        newData = _useState4[0],
-        setNewData = _useState4[1];
-
-    var _useState5 = (0, _react.useState)({
-      userId: 211231,
-      likeId: 21,
-      userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
-      userName: "Daniel"
-    }),
-        _useState6 = _slicedToArray(_useState5, 2),
-        currentUser = _useState6[0],
-        setCurrentUser = _useState6[1];
-
-    var _useState7 = (0, _react.useState)(post.like),
-        _useState8 = _slicedToArray(_useState7, 2),
-        userLiked = _useState8[0],
-        setUserLiked = _useState8[1];
+        userLiked = _useState4[0],
+        setUserLiked = _useState4[1];
 
     function likeFunction(id) {
       // const buttonId = Number(e.target.id);
@@ -34460,23 +34465,47 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _DataContext = require("../DataContext");
+
+var _reactRouterDom = require("react-router-dom");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function User() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Options : "), /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("label", null, "Username :", /*#__PURE__*/_react.default.createElement("input", {
+  var _useContext = (0, _react.useContext)(_DataContext.Context),
+      feed = _useContext.feed,
+      currentUser = _useContext.currentUser,
+      setCurrentUser = _useContext.setCurrentUser;
+
+  function handleIdentity(e) {
+    e.preventDefault();
+    var newIdentity = {
+      userId: 211231,
+      likeId: 21,
+      userPic: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUSExMVFRUVGBgYFxcXFRUVFRYVFRUWFxUXFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGyslICUtLSstLS0tLS0tLi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0rLf/AABEIAPcAzAMBIgACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAAFBgMEAQIHAAj/xAA9EAABAwIEBAQDBwIFBAMAAAABAAIDBBEFEiExBkFRYRNxgaEiMpEHFEKxwdHwUmIjM3KC4ZKiwvEWJEP/xAAaAQACAwEBAAAAAAAAAAAAAAACAwEEBQAG/8QALREAAgICAgECBgEDBQAAAAAAAAECAxEhBBIxE0EFIjJRYXGBFNHhBpGhscH/2gAMAwEAAhEDEQA/AOTtW7ivCErHhqASMqWCLVTQxKyWgBRkHIWwsAIxm0ulGCqLTdGIMUaQowQ8l19VbRVaqpVWqqMx0VN5KHAR6aZQioKw5RkI8BE0ctzqrE0QshxFlIKg2UNHETYCSiEdIbKOhIujBItohbOyApmZSoi/kic9PdVRTLkzmV2OWripJWWUbWXNkQDZm6u09OXBTUOHXTpwzwnJO4BrSG31cRoBz8ylue8ITK3GkLVFwvPKM0cL3AcwNPqi2HUWQ5HtLSORFiF32gomQxtjYLNaLD90D4x4cbPGZGACVguCPxDm0p8dHTrnjJySuaEIkaiNW4nQoaRqql7TeUII3RAqs+m1V5alyUm0dlrwBGWsoJCvErQhXy82btWj3lSAqFy4hMy0LcxrMKvNYCF2QslOKWynMoIWk9PzUTW2UM4y8FR2PRW4mArAnJJDRayOMckNkDYSdxZbspwASd+SxIbfMVXkqCUzrFEZbN3VJbqLW8l5te48lExtzr/7UoaLqcEHvvruv6qenrCdFVdH0WjGubre6iSz5ORckaSbBdc4R+zuMRMfKLvcA49s2oAXI6Otc14dYGx2Oy+m+EsUiqaZj2OadBmAN8ptqD0S1HG2BJOTwAf/AIpHEbsaLDcWTXhEIawWFtFrXkDbklp3FYgNjG93la31JUSnXBbaQlONc9jusEIDw5xH96Lh4eS391yfZH1EZKSyi3Gamso43xHgr45XlzbAuJHSxN0sVdPZdz4lo2yRG+42XI8dp8p80i2GCjOPWWBcC1c1SO3W2VVsEIVgssChLlljloNF5onkCjLVOwXWHtUZBK4NlNBNqonLVhsVwYbYwOCqvi1spqSS4UpbbzXQWXghsrSta3dVHTWG3f3Vits64OllNhWEPn20HVWG8HRWQXKc2p6+yjO+g7J2k4SFtDr17qmeFyO6X6iG+kxVc4rUPTSOGib3Q2uwcjkV3qJkOpoECT6HZbEK5Fhj3aWUxwZ42F1PdA9GD7XsjPDeNS00okjcQQdRfQjoQhxonDToq8j7FTlMGUfZn0lw3jIq4WvNg4/M0HYqHGMLB1suQcH8TGmew8r/ABHq2+t+q7dFXMnYJGEOa7b9iORWTyaGpbKdkdYYsYfJJTvztF+oOxCaaPjCB2jyY3dCNPQhDK9oSTxBFzGi6q91/KwYTlDwdGxjG4i35rDuDc+S5XxNiLXu+HYbfuoCX2+YqpJRudqjd7k9+A2m32kVA66lC8KYjdZyrspgMUciyWrLCvFXWy62bxuXpHrFlC9yhHIySo7rYFbMZcogghhsl9FflaRfXl+qG00VnBGhAXHJ119E2peWBIhoMO8V4FtE80NCI2gAKDAKDILlGCxRPyWa1hENlC6NWsq2bBZKkPQPMKqzUl+SPNguoJ6YpLQaYAZSgHQLcU4PJEJIFGGLkS0ik/DWO5BAuIuHAW52DUbhODGrL4biysQRWmjkkdwbLsX2Z1ZdTFl9WuOnY7LmfEeHGN5I+UlOv2VVOsjcwuQDbry/nmhv3WyjetD3XFoBJOoSFjFVnflA0HunvEo9NUjYjT2fdY0sKRXgsyIqeO+iO01GMo0QqnailNWgCxSp5fgbbHRRxSiBF7JakFjZNOJ4jHbdKNRJmcSrdKaRWQpBYKysrTNA1LlqGrYrW64k9lWzHWWGuWbLiQhSPu4CyceHqQudntubD0SthrNQuk8F0of+Hlrqn1eAX5CVPS2Hb8+6zIETrI7DohNRUNZ8x9OZQz0WIGtit8yqRYvGTbbzV+nLX7Fv1CQ8jk0YbIsE3Vh1PZaspTul9nkPCB88apSBG5qQhUJadRneydFGJ+qIU7Lqp4JCIUemhT6xFgp8YwXFrIXwDTzGpb4Rs0av7Nv+d01cRMBHP+Aqr9ltL/jzOvo0Wt/qN/0RXPEGUr38rHuqhuLlK+KRXcm2sS/WR6rzls8MrVeQS2OwVCtjNkc8Ne+535IK7sMda8ITfuTzuon07gbWTxLQAC9kLmphdaELclTucsCysArK1EaCMOCicp3lQEKQjDEUwikEsgaTZupceYaBc27oaAmrgmlBMjzyDWjzcdfYIJPCyHCPaSRerMGZGwTQlxaNw7f1CfPs6jJY9557eSoVUTPCsbC419Ue4Bhy0xdbdx+g2TePY5RaYfIrUZLASrWCxJ9EsVFOC4k2v31RTGqyyTa/HHBwa1p1Nh8JcSegA/dJutbliI2utKOZFqtwFj7kCx7fqgwoTG7cix6/zRem4mmZ4gcwNyW0eQ17rnZrRe5truoosTMhGZpaSARy0OxQy7xWToqubwhswvEyDlcb/wA5JgjrBZI2HAk3RaectCR60sjlUsF/FsYAOnJJddxDKCbAEHlz9FYrKkuOXdSUlHHf4zc9ALn6BMja35QEqse4Mi4ikdpqPRNOC4uJfgcLP5abofNLEDlBHqLH3U9OG6ciDcEdUyFyzhoXKp4ymEqiLOHdgVX4BeGMndpcyW9AB+5RMR/C54/ocT5gapHwbEXMjN3WBcbWFzr26KeQm69FK2Ep6idMkqLqtLBmQ/CJiWjMmCJtwsFxy8Mz4yaBTaPVXGU6sNYpDZQqd5JlPJRqmgCyXKp4zJirml2yGjCQdTe6uJKKFHErLVxUzWrWSNa5rEJWAFkhYuuZJ5NnBEmsjOoa7/pdr7FKQTBwhUBlQy+z7sP+4ae9kEloOt4kmdIfRh7iHbAXTZgUWSjYOZufqSk+eR0YEpBOX4XdxyKd6HWmZ5D8lHGWHIs8nfUDVUYcdQqNZQtcLZQjErFG2MKJS3hBRWhTxDhWOU5ntu7TW5BsNr9VK7DbgB9vgtlOUXFha1+nZM5jF9VTqmA6I29AqKyDqaNue4aAOgUuMtaWi2mika5rTZR1NuarySHrSFuKjJDi0EvJsB25nv5IdjWHPiN4w6S7SHBxtZx5hoPTbyTOyCzswPkrdQGvHxN1Ta5KH7E2QcznUVNO2NvxmRzj/lO+Kw5WdyKL4Y6Vtg9jm+aPNpQHC2yKiLMBcXQamT1cDaN5FHMTyjdb1CSGQANaOyfaxlqOo/0W+qRGM1jb1J+nNHavljEXTjtKQy4XUZXFpRttcOqTImODi4ncrebEMqy7KX2yYM/qeBzNat21iRocXcTZEIKh5I5DzTflUQWNtLd5RKOAW2VDCNkVzpcq2/IUUfNLnLLTdRELZpWwzUZmSNQFqslyicgByQ2U8L7bbqNwWYwuYR1zBcZbUwDUB4AD29+vkU5wTZYGD+0L5/p3FuxIPZdtgqQaaE8zGw/9oUweE2OU++EWvFG6xC66G+MdVuyewVXvsuJaCFTK1ouUKnqW2LpHiNo69+6xNIXOva4Q3GqbxB+G3Nrtj3Tm20CkshaEQOtZ2a+xGt1pVQRg2zX8krUmFshOeHMw82Zz4Z8gdlBiX3mQ2zmIdcoeT5C6U08hp6GaeIgXbq0a9wD1UscdwlXDmubo2SWQn5nPBAHkEzUlRpZSQjaSAK5SC26qSzLUVlglqeGTNaLPEMxFHIG2vI5jB6nX2CU6CD/EJP4BlHmdyi+NVDTHGxxtd5d9Bb9UNlqw5wDfwjfqU+yejPtn6db/ACEHU2myD4lCi8Va61jZU6hmZ1ykSccGOewPC7jMeaY6bDFphA0ATAzbRVZL5mco5I4WZQqstcQbXUtQ+wS9U1BzHVG+QlpnPRx4rZoWrgtmuWpJ5NRska1aPYpWlYcUtNg5IizRasFlKSrGHUDpnhjBck78gOZPZTkOEXJ4RJh1G+Z2Vg8zyaOpK6nhsgEEbAc2Vobfrl0/RLLmMp4xFH/udzceZUnD2JXDozu03Hkf+Un1MtpG5P4Z6FCm/qyMhdZbvP0VQTXUdZP8NghiVZF37wDo1VZjc6kemqXHU9UZLhwDXac9LeSs0uGzEu8SUR2Hw2bnz9t9P+VZjF/YU2EZaYn5XC/Q6e60LibXyi3Q3/Rb1PDkzGBzahkhJAyt3GZwHXle/oqGKYZVU/zNa4HS7XA9/qpcfwR3j9wnFZbvb0SrBxAWnUWsbEH39VeocYD3XGxS5pYJjJoLOmUQdey0mfotKeUC7jsNT5BV+uxrlou4jSl4HYfnqUvvaY3IrQcVxSnKAW+apYydSisg1sxL6LYy7SWmWaeoBCy6TmhFNJZW/F0SZZZXcQ/g1YmilqLhc3p6ssddM2G4u0jdJz8wtPDDuIS3CVal/wARRWprRbdL88tySgsry8huJzUlYaNVvZeaNVsZNAmYFpIwqVossveEKIRC0Jw4XpfCp3zEfFIcoP8AYOnmfySi1P1VGGU0TP7Gm3ci/wCqC14ibPwapTv7P2QHq57oRRTuZJ4g5aeY5q3UE2IWk8QaxV46PRXx9Rb8DHTYhex6q+JgUmQVBaAeSOYfWh3qnOONnmpfYOOlyjTVax4mzY6dlEBoqdTh5dyRRskgOi8hn7yzkVpPOy2rvdL7sBeBcX+pCpS0cg3LvqUfqneQ9LUQ2IAGu+guUM8No+UBo7KvBERqtpJuqh2OWgOm8lySdQTOdIx4Y0uaB8ZA0A7lBsQxKzSiPCnE5hDYnNaWSG8pcL2aTy8gihUn5DhLElrP4IsEwt0kgbEy59vUpv4mwSSOBr3tAIsCQbg9FDjPEsTR4WHgX/E9jdAO3UrDuIH/AHCRtSS/K9lr/ML6EFFKhKL3llq+yXIrcFFJfnz+xdZopWuVh1KHRCWO5bzHNv8AwqTDYqhtaZ5y+mymXSxYZM5aszA32V6kjB1KkmiCFx9yqyA1RWA8qNrNbItDRaIc5JbOZtcpI1BZSsWizQLLnaKq52qmutYqRz3WY0k9lMd6OL2B4eZn2uA1uryTYAefdOuNDNEwt2yi2x2Ftx5LShghZTmEsOYRhzrEAvebE8uS1wZ4kgMdjeK4FzrlO37JVqbR6j4ZSqf2xdsCR5rbFzZh8lLUxZX+RWMVp/Ejtfe1/wBVXWmjUsz6csecFLDAHxDyUTnuidzstsIs0lg2BI+hReopA8K1o8rtrJPhmLhwAJsUepqwW0XPqiicw/CVozE5Gb380Dr+xyn9zosuKDZU5alpBJSOccK0fjZ6qOkmT2iM1ZO0dkvV9eOSHzV737LWKAndMjHHkBy+xG67zcpww3hGSWmmq8wa0XDBzfl005AX0Qagwcya/LG35nf+Lerk5x10roxCDliAADAABYbJrsjBbLHE4llzzF4+7CnA9dHSMbH4QN/nf+IuO/LZUPtjLGmNsQF5hnNho7kswgBVuIpxPJTtGro2OaT/AEguBGnWwSochtPsad/w6MZRdfvpl7hOLLGGOFxlsQfJUsdwtsYEjAS0m1gL2P7K9hzTG0nMSCLa7hSPOeJ7Oo08xslZTWx3J4NfIWJrwBKSUDQ6HoQQfdb1FRYK3hlTmblcAeRB12U8lIwi7WXHNt7G39pUYi1oxuT/AKews1S/hgyhYSbpop2fCELw1kbs3hnbk7Rw7Ik1pXQrSR5+7iW0yxZHByFka2YNViIrYNTx5mRqfKDBH+CGQMLnFoLiOp79EhlpXeuBJAaS9rOIF+o+EafmnVWquMpkqHeSQkOw90kTXtGWRgs7Npq02IddVKypjhDZR850LRbRvPN125Jp40pHRtdIxt2PLc4AJIcNnHtt9ElyYOZACw77fqqakp/M3o9bRZKVaUfK/wDCniGJFxvYWcNDYX/mqoOqXjY6d9VdmwSdnwuYRzA8+nRDg+xsQNOqdHr4QE52Zy2RwENcTtffpfsmCinDhoUEIaditMpbqDbuCjcE/BSlSvKDdZFzVAwAqxR1Tnizh2vbn081vLSnp+iVnDwD/TWNZSyU34UxwuGj+d1QlwxrTsjmH08r5GxtAcXaf+0zQcASPIMsrWjmGjMfqbBDOzr9TE+ljyjnBhCL4Tgs0xDYoy4nS4GgsL6nYLpdHwTRxWJa6Rw5vJ3/ANI0R6ne1oytDWN52AA9kl8qOcLZPp6yLuHcE5I2GZ92hukY0DXbkk3+IpaqZGsJDToE0cWcXRxt8ON2Z2o01t5/suaTVhkkyE2zamw5dOy6WZzNfgznVW5T/hG2I46S4xxX6F3ft1V3DbMcS4HMQLmxOtuqgwrBwx3cn80w0zN/VS8J4RerjZJdp+ft9iyxwLOoI9lXpYcpu0nyJuPToo3SCMkH5XbHkD0VmB4U+Biw/PkGxuyzOA2dqijXWKE4lGWzNcNiicZuEHuGvBtU0IlN2fC/ryPS/wC6AzcSVEDjE9oJadyL6efMJmoNy0bkG3nZDZKJ7yXZe2oHLzTYeSjyYKSwxAj0T5wdwK6p/wASe8cVtORf5dAtuGqOjhd/9hgkPU6hp0O36ro+D45BKCIiCG6W29k22Mq/qX9jx1UVMF0fC9JAfhhDiNnOOY+6IsYIZA/ZkvwuA5O/CfLkp8XxGGNhc+wA+pPQBBcKxU1eYNYBGNCS656iwHNJq7YcnuPjPsWpKKxFaYwPP4SknisQ0j2viuXn4hH+G/Nw/pCcRG7KATcjS+1x3CRuO8Fne9kkbHP0ykDW1tjZKoUPV6t6LPrWVx7Q8iFUYs5ziXg3JJJP7q1SYjHoHxxyNts/cAa6PFiFFUYfNfI6F99DYtPPUdlBJw9LuIpB6fotSUK/aS/kXDmyepx/2HfhinoqmQRiiY1wF753uH0J7p8pcAhYbCCIEDk1u2/MLi2BOq6WUSMY46WILTqL7bbp3oON5pHAPjyPHMktB6akKlfB57eV+wndGWovH7Heehe0XbEPTKlzGMVhZI1k0JtfR5DS306qLEOKquNhLoHEDYsIcfb9ko4hxyyYFskJItzbueiQqoyfaCbDhb1eJ4Oh01JTOkZKxrQRsW2G4ty81dxSsaw78ly7AcQDjaFz2jmxzwB6XPlsi2I1jrEZmk20+LOfbb6pcovq4y8/kfCHqTTi8oLYjxNGzdwv2IKVcV4nlmvHELN/q1/nVCJaVguXuv27qpLVuf8ADE3TqNAPVdXUkasePCvb/wAmKmcR880h59+wTTwjwg948aU2Lt77gdEC4Zox95Y0s8Z5PWwZ39F2qGMNaGhFbLoirffJS1rAKp8BjY1xAu8g2J5E7fmlyqoHw6PHryPqn0BUsapPFjLee48wlVzfuDRzZRn820xCns4ZTqFUEBjOZhNhu3lbsrb2kEgixC8CrKkbTimsg3HKgExEG4v7WRKldcBLWMzBrhru8Ze1t/S6Msqcsd+ynrlrAmu9Pvn2ClfEIrZib72HtqqpfNN8YBsdNNNlrRTDwhFUB3+I68Tv6b6Xvva6zUYgIz4bTo3TTn1KszqlX8sjNo5UeS3KOn7gipkFza+u/c39lXp5HMcHNJaR0NiilfTMbdzRft59EHdirdi0A+S1oW12x8nmuTw7uNLEl/JYrsRlksXuLrX3O1+ndNP2aVBDpI9eR8iND+fskt1Ww9E7fZq1hdI64zAAWvyJ39lV5sYRoeAeO5OxZHieQ5itBUFX54A1tybkqhJI0cwvN2wlGW/2bFbUlosxTX0tcHcfulfjOE+A9zLtez4hl5gbj6ItLisLLEysHbML+gQTG+Jad7SGnMSCDZpO46qzW9KXuv8AoF0zk2kns52OIZRa0jvb9lk8Ry31f/2goW7DpSXWbpyvppf2W7cFk55R7rUlZR5whEOBy34TCD+J5bayu+gQSqqGvcXPuXfS/wBEQbgQ/E8+mikGHQt318yg/qKofTEtR+D8if1y/wCSjhUwa7MGjtz3RbxpX7Nyjq7T2WscwAsxnsopXuPzO3Ow3N+Sq2Tdksm3xeOuPX0TMSQsH+Y7ORyGg9eqxJWXFmgAdkzU/BDhSuqqh/hgNDmM/ERyD77X6JVf5eg/JOhQ8/MIny4tP03+B8+zCgaA+d3zE5GE21aLFxHrYeifnPF9wuMU7vDabE/CMosdnO5i241etG1T+b3fU7ILuG7H2yUOmXnJ2xh3P87rRx1QjhzGIpowI3HM0DMD83/KJtWfKLhoRjZRxbCGTAnZ3UfkUg46404eH/hv69LLpr3WC479qOLNlnETP/z+c9Xch6fqm8fMpYLtPMlVFp7XsL0c5nmLiPhAsB+qYqNwkcxp+UH4j0Hog3D8HwucjGBzywslmDWFrz4QzXuCRu0c7ArV4sU7v0VuZKVXC15k9l2oqAalgDi+NpDWX5NB0tbzVDEH/wCI6x5qJ8paWuG4IPqDdTYxTh0mdhu14Dhr15ehTuZ9SZW+EzxGUf0wnJC4qjU4KH72/ZXjUqJ1SsdSa8HsJ1xmsSWQQeFhf/NI9/zVzD8G8E3bPKOtiG+4F1M+pKhdMUbum1hsqrgcZPKigqah1g0zzOA/qlf766qJ87eZJ8yT+aGF5K8InFLbb8liNUI/TFF01LRsAoZK7TRaCkUraMKBmGVnVhOy0c555K86JrfmICryV7Bo0F59vqpIevLK/wB3e7c/RbGmY3Vx+upU7Gyv3swdt1LDQtadi53U6riMfZFK7naMbYf1O0H03VGRoGpJJH4j+g5Ls3DvDUP3Yl+WQyDU2+UEbNK45ilC5tTJCdo3EHuL6fVX66MLszFt5ysm64+wVrOI5pqaOncfhZ9XW+W/kENo23kHMM+I+lre5ao3mympGnISLXkcGt3vYW2PQlw/6VYRWwlpFiR9mDa7iXnqDctAPpc/7lTmfYb76fzqpalwzEC9hoL9Gi26pTuu5o6D89/0XMn2GbgqQtqWa2uHA9wRt5bfRdPY7RcQdMWAFps4EWPMW/gT3hPG8Zp3vl0fGNR/VyFu5Wdy6pSakgZotce8TikhIabyvFmDe3Vx7BcY+8lxJOpJuTzJO5RLGK19TK6aQkknQcmt5ABaYPhLqiURNG+pNtA0bkp1NSqjsrvtnJcwWoszKQRfY8j2Remkpy1kcj3tf4lwR/lsY6wcT1Oi2q8PYwOjaNGuAHpZUm4azxANbWFtduqmm+MLO5pcjiWX8ZVr8Mt8R0QiN2PEkd7NkHyu0B9CpsCnDohmtdpI5f6un9yhxWjc2AtaS5gOax5Ha/0QTD8SMbS219b79h+yvzlG6OYnnnVZxLOs1hjG6618PusryxD3iMCJbsgC8vKCUTMgUhaBqV5eXEleormtVJ9a9+2gXl5cA284Mw0Gb5jfzV9kTWbBZXlwSSJWtvqfNTMFhdeXlKJYX4Z4hczxIzq0DMO3VJeKVniyvk2zOJ/b2Xl5aVMm60ef5EIrkSaX2B2UuIa0XcdAL21Pc6InHGWBjHD/AC2FzgdRmsZLCx2uQvLyclrJWb3j8A90nb8lFEbnN128uS8vIBnua1btB6/t+6G5y435Ly8h9xc/OCQLof2d0AED5ravcR6N0HvdeXlX5TxWQD5/ilcOriUPqaprZ9dtvdeXlXgs6N6UnGpNfg3ZXXkNtWkag9DuEu4hAGSOaL2vp5HZeXlc4bxNoyPjK7URm/OT/9k=",
+      userName: "Fabrice"
+    };
+    setCurrentUser(newIdentity);
+  }
+
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Options : "), /*#__PURE__*/_react.default.createElement("form", {
+    onSubmit: handleIdentity
+  }, /*#__PURE__*/_react.default.createElement("label", null, "Username :", /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     placeholder: "Type your username here"
   })), /*#__PURE__*/_react.default.createElement("label", null, "Profile picture :", /*#__PURE__*/_react.default.createElement("input", {
     type: "url",
     placeholder: "Paste a URL here"
-  }))));
+  })), /*#__PURE__*/_react.default.createElement("button", null, "Save")));
 }
 
 var _default = User;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../DataContext":"DataContext.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34557,7 +34586,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59036" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49677" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

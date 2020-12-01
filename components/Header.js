@@ -1,7 +1,9 @@
-import React from "react";
+import React,{useContext} from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../DataContext";
 
 function Header() {
+  const {currentUser} = useContext(Context)
   return (
     <header>
       <h2>OnjaBook</h2>
@@ -17,10 +19,10 @@ function Header() {
       </nav>
       <div className="user">
         <Link to="/user">
-          <span>Daniel</span>
+          <span>{currentUser.userName}</span>
         </Link>
         <Link to="/user">
-          <img src="https://portfolio-onja-daniel.netlify.app/images/daniel.jpg" className="user-pic" alt="" />
+          <img src={currentUser.userPic} className="user-pic" alt="" />
         </Link>
       </div>
     </header>

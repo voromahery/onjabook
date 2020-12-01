@@ -10,6 +10,12 @@ function ContextProvider(props) {
   const [postDescription, setPostDescription] = useState("");
   const [postImage, setPostImage] = useState("");
   const [newComment, setNewComment] = useState("");
+  const [currentUser, setCurrentUser] = useState({
+    userId: 211231,
+    likeId: 21,
+    userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
+    userName: "Daniel",
+  });
 
   let [state, dispatch] = useReducer(
     (state, action) => {
@@ -83,6 +89,8 @@ function ContextProvider(props) {
           newComment,
           setNewComment,
           postDate,
+          currentUser,
+          setCurrentUser
         }}
       >
         {props.children}

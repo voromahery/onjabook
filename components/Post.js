@@ -13,15 +13,9 @@ function Post({
   likeFunction,
   post,
 }) {
-  const { feed } = useContext(Context);
+  const { feed, currentUser } = useContext(Context);
   const [likePost, setLikePost] = useState(like.length);
-  const [newData, setNewData] = useState([]);
-  const [currentUser, setCurrentUser] = useState({
-    userId: 211231,
-    likeId: 21,
-    userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
-    userName: "Daniel",
-  });
+
   const [userLiked, setUserLiked] = useState(post.like);
 
   function likeFunction(id) {
