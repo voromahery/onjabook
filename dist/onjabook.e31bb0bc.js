@@ -33905,10 +33905,12 @@ module.exports = [{
   "description": "Look deep into nature, and then you will understand everything better.",
   "like": [{
     "userId": 21231,
-    "likeId": 1
+    "likeId": 1,
+    "userName": "Minato"
   }, {
     "userId": 65631,
-    "likeId": 2
+    "likeId": 2,
+    "userName": "Rize"
   }],
   "date": "12 April 2020",
   "comments": [{
@@ -33932,7 +33934,8 @@ module.exports = [{
   "description": "Love breeds sacrifice, which in turn breeds hatred. Then you can know pain.",
   "like": [{
     "userId": 231,
-    "likeId": 3
+    "likeId": 3,
+    "userName": "Andy Bogard"
   }],
   "date": "24 October 2020",
   "comments": [{
@@ -33949,6 +33952,18 @@ module.exports = [{
     "id": 968567345734
   }]
 }];
+},{}],"userData.json":[function(require,module,exports) {
+module.exports = [{
+  "userId": 21231,
+  "userName": "Loïc",
+  "profilePictureUrl": "https://picsum.photos/100",
+  "birthDate": "13/09/1991"
+}, {
+  "userId": 1212222,
+  "userName": "Shaun",
+  "profilePictureUrl": "https://picsum.photos/100",
+  "birthDate": "13/09/1991"
+}];
 },{}],"DataContext.js":[function(require,module,exports) {
 "use strict";
 
@@ -33961,6 +33976,8 @@ exports.Context = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _postList = _interopRequireDefault(require("./post-list.json"));
+
+var _userData = _interopRequireDefault(require("./userData.json"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33994,6 +34011,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+console.log(_userData.default, "USER");
+
 var Context = _react.default.createContext();
 
 exports.Context = Context;
@@ -34018,10 +34037,9 @@ function ContextProvider(props) {
 
   var _useReducer = (0, _react.useReducer)(function (state, action) {
     switch (action.type) {
-      case "ADD_IDENTITY":
+      case "IDENTITY":
         return _objectSpread(_objectSpread({}, state), {}, {
-          userName: action.userName,
-          userPic: action.userPic
+          identity: action.userIdentity
         });
 
       case "POST":
@@ -34048,15 +34066,15 @@ function ContextProvider(props) {
             userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
             comments: [],
             date: postDate.toDateString(),
-            like: 0
+            like: []
           };
-          console.log(state.comments);
           return {
             feed: [].concat(_toConsumableArray(state.feed), [newPost])
           };
         }
     }
   }, {
+    userIdentity: [],
     feed: [],
     userName: "",
     userPic: "",
@@ -34087,15 +34105,8 @@ function ContextProvider(props) {
       postDate: postDate
     }
   }, props.children));
-} // id: Date.now(),
-// description: "action.description",
-// postPic: "action.postPic",
-// userName: "action.userName",
-// userPic: "action.userPic",
-// comments: "action.comments",
-// date: "new Date(Date.now).toDateString()",
-// like: "action.like",
-},{"react":"node_modules/react/index.js","./post-list.json":"post-list.json"}],"components/Post.js":[function(require,module,exports) {
+}
+},{"react":"node_modules/react/index.js","./post-list.json":"post-list.json","./userData.json":"userData.json"}],"components/Post.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34112,6 +34123,20 @@ var _reactRouterDom = require("react-router-dom");
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -34144,6 +34169,26 @@ function Post(_ref) {
         likePost = _useState2[0],
         setLikePost = _useState2[1];
 
+    var _useState3 = (0, _react.useState)([]),
+        _useState4 = _slicedToArray(_useState3, 2),
+        newData = _useState4[0],
+        setNewData = _useState4[1];
+
+    var _useState5 = (0, _react.useState)({
+      userId: 211231,
+      likeId: 21,
+      userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
+      userName: "Daniel"
+    }),
+        _useState6 = _slicedToArray(_useState5, 2),
+        currentUser = _useState6[0],
+        setCurrentUser = _useState6[1];
+
+    var _useState7 = (0, _react.useState)(post.like),
+        _useState8 = _slicedToArray(_useState7, 2),
+        userLiked = _useState8[0],
+        setUserLiked = _useState8[1];
+
     function likeFunction(id) {
       // const buttonId = Number(e.target.id);
       var findPost = feed.some(function (post) {
@@ -34151,9 +34196,14 @@ function Post(_ref) {
       });
 
       if (findPost) {
-        setLikePost(like.length); // console.log(likePost);
-      } else {
-        setLikePost(like - 1);
+        var newLiker = _objectSpread(_objectSpread({}, post), {}, {
+          like: [currentUser].concat(_toConsumableArray(like))
+        });
+
+        console.log(userLiked, "Yes");
+        setUserLiked(newLiker.like);
+        setLikePost(newLiker.like.length);
+        return newLiker;
       }
     }
 
@@ -34180,7 +34230,11 @@ function Post(_ref) {
       onClick: function onClick() {
         return likeFunction(post.id);
       }
-    }, "Like"), /*#__PURE__*/_react.default.createElement("span", null, likePost)));
+    }, "Like"), /*#__PURE__*/_react.default.createElement("span", null, likePost), " ", likePost > 0 && userLiked.map(function (user) {
+      return /*#__PURE__*/_react.default.createElement("li", {
+        key: user.likeId
+      }, user.userName);
+    })));
   }(id, likeFunction);
 }
 
@@ -34503,7 +34557,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49677" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59036" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useReducer } from "react";
 import postList from "./post-list.json";
+import userData from "./userData.json";
+
+console.log(userData, "USER");
 
 const Context = React.createContext();
 function ContextProvider(props) {
@@ -7,27 +10,31 @@ function ContextProvider(props) {
   const [postDescription, setPostDescription] = useState("");
   const [postImage, setPostImage] = useState("");
   const [newComment, setNewComment] = useState("");
+
   let [state, dispatch] = useReducer(
     (state, action) => {
       switch (action.type) {
-        case "ADD_IDENTITY":
+
+        case "IDENTITY":
           return {
             ...state,
-            userName: action.userName,
-            userPic: action.userPic,
-          }
+            identity: action.userIdentity,
+          };
+
         case "POST": {
           return {
             ...state,
             feed: action.feed,
           };
         }
+
         case "COMMENT": {
           return {
             ...state,
             comments: action.comments,
           };
         }
+
         case "ADD": {
           const newPost = {
             id: Date.now(),
@@ -38,9 +45,9 @@ function ContextProvider(props) {
               "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
             comments: [],
             date: postDate.toDateString(),
-            like: 0,
+            like: [],
           };
-          console.log(state.comments);
+
           return {
             feed: [...state.feed, newPost],
           };
@@ -48,6 +55,7 @@ function ContextProvider(props) {
       }
     },
     {
+      userIdentity: [],
       feed: [],
       userName: "",
       userPic: "",
@@ -74,7 +82,7 @@ function ContextProvider(props) {
           setPostImage,
           newComment,
           setNewComment,
-          postDate
+          postDate,
         }}
       >
         {props.children}
@@ -84,12 +92,3 @@ function ContextProvider(props) {
 }
 
 export { ContextProvider, Context };
-
-// id: Date.now(),
-// description: "action.description",
-// postPic: "action.postPic",
-// userName: "action.userName",
-// userPic: "action.userPic",
-// comments: "action.comments",
-// date: "new Date(Date.now).toDateString()",
-// like: "action.like",

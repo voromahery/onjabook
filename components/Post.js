@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../DataContext";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Post({
   userName,
@@ -15,15 +15,27 @@ function Post({
 }) {
   const { feed } = useContext(Context);
   const [likePost, setLikePost] = useState(like.length);
+  const [newData, setNewData] = useState([]);
+  const [currentUser, setCurrentUser] = useState({
+    userId: 211231,
+    likeId: 21,
+    userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
+    userName: "Daniel",
+  });
+  const [userLiked, setUserLiked] = useState(post.like);
 
   function likeFunction(id) {
     // const buttonId = Number(e.target.id);
     const findPost = feed.some((post) => userName === post.userName);
     if (findPost) {
-      setLikePost(like.length);
-      // console.log(likePost);
-    } else {
-      setLikePost(like - 1);
+      const newLiker = {
+        ...post,
+        like: [currentUser, ...like],
+      };
+      console.log(userLiked, "Yes");
+      setUserLiked(newLiker.like);
+      setLikePost(newLiker.like.length);
+      return newLiker;
     }
   }
 
@@ -52,7 +64,11 @@ function Post({
         >
           Like
         </button>
-        <span>{likePost}</span>
+        <span>{likePost}</span>{" "}
+        {likePost > 0 &&
+          userLiked.map((user) => (
+            <li key={user.likeId}>{user.userName}</li>
+          ))}
       </div>
     </div>
   );
