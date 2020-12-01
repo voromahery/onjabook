@@ -4,17 +4,9 @@ import Comments from "./Comments";
 import { Context } from "../DataContext";
 
 function Feeds() {
-  const { feed, dispatch, newComment, setNewComment, postDate } = useContext(Context);
-
-  const [likePost, setLikePost] = useState(0);
-
-  function likeFunction(e) {
-    const buttonId = Number(e.target.id);
-    const findPost = feed.find((post) => post.id === buttonId);
-    if (findPost) {
-      setLikePost(findPost.like++);
-    }
-  }
+  const { feed, dispatch, newComment, setNewComment, postDate } = useContext(
+    Context
+  );
 
   function handleComment(e) {
     e.preventDefault();
@@ -38,6 +30,7 @@ function Feeds() {
       {feed.map((post) => (
         <Fragment key={post.id}>
           <Post
+            post={post}
             key={post.id}
             id={post.id}
             userName={post.userName}
@@ -47,7 +40,7 @@ function Feeds() {
             postPic={post.postPic}
             like={post.like}
             postLike={post.postLike}
-            likeFunction={likeFunction}
+            // likeFunction={likeFunction}
           />
           {post.comments.map((comment) => (
             <Comments
@@ -70,7 +63,7 @@ function Feeds() {
               }
             />
             <button type="submit" className="post-comment">
-              Post
+              Comment
             </button>
           </form>
           <hr></hr>

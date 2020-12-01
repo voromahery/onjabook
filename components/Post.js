@@ -1,15 +1,42 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../DataContext";
+import { Link } from 'react-router-dom';
 
-function Post({ userName, userPic, date, postText, postPic, like, id, likeFunction }) {
-  const {feed} = useContext(Context);
+function Post({
+  userName,
+  userPic,
+  date,
+  postText,
+  postPic,
+  like,
+  id,
+  likeFunction,
+  post,
+}) {
+  const { feed } = useContext(Context);
+  const [likePost, setLikePost] = useState(like);
+
+  function likeFunction(id) {
+    // const buttonId = Number(e.target.id);
+    const findPost = feed.some((post) => userName === post.userName);
+    if (findPost) {
+      setLikePost(like + 1);
+      console.log(likePost);
+    } else {
+      setLikePost(like - 1);
+    }
+  }
 
   return (
     <div className="post-visible">
       <div className="user">
         <div className="user">
-          <img src={userPic} alt={userName} className="user-pic" />
-          <span>{userName}</span>
+          <Link to="/user">
+            <img src={userPic} alt={userName} className="user-pic" />
+          </Link>
+          <Link to="/user">
+            <span>{userName}</span>
+          </Link>
         </div>
         <span>{date}</span>
       </div>
@@ -18,8 +45,14 @@ function Post({ userName, userPic, date, postText, postPic, like, id, likeFuncti
         <img src={postPic} alt="post" />
       </article>
       <div>
-        <button className="like-button" id={id} onClick={likeFunction}>Like</button>
-        <span>{like}</span>
+        <button
+          className="like-button"
+          id={id}
+          onClick={() => likeFunction(post.id)}
+        >
+          Like
+        </button>
+        <span>{likePost}</span>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 function Comments({ author, authorPic, authorText, authorDate }) {
 
@@ -7,8 +8,12 @@ function Comments({ author, authorPic, authorText, authorDate }) {
       <div>
         <div className="user">
           <div className="user">
+          <Link to="/user">
             <img src={authorPic} alt={author} className="user-pic" />
+            </Link>
+            <Link to="/user">
             <span>{author}</span>
+            </Link>
           </div>
           <span>{authorDate}</span>
         </div>
