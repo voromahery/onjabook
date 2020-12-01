@@ -34001,6 +34001,11 @@ function ContextProvider(props) {
       postImage = _useState4[0],
       setPostImage = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      newComment = _useState6[0],
+      setNewComment = _useState6[1];
+
   var _useReducer = (0, _react.useReducer)(function (state, action) {
     switch (action.type) {
       case "POST":
@@ -34010,34 +34015,34 @@ function ContextProvider(props) {
           });
         }
 
+      case "COMMENT":
+        {
+          return _objectSpread(_objectSpread({}, state), {}, {
+            comments: action.comments
+          });
+        }
+
       case "ADD":
         {
           var newPost = {
             id: Date.now(),
             description: postDescription,
             postPic: postImage,
-            userName: action.userName,
+            userName: "Daniel",
             userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
             comments: [],
             date: postDate.toDateString(),
             like: 0
           };
-          console.log(newPost);
+          console.log(state.comments);
           return {
             feed: [].concat(_toConsumableArray(state.feed), [newPost])
           };
         }
-
-      case "COMMENT":
-        {
-          return _objectSpread(_objectSpread({}, state), {}, {
-            newComment: action.newComment
-          });
-        }
     }
   }, {
     feed: [],
-    newComment: ""
+    comment: ""
   }),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       state = _useReducer2[0],
@@ -34058,7 +34063,10 @@ function ContextProvider(props) {
       postDescription: postDescription,
       setPostDescription: setPostDescription,
       postImage: postImage,
-      setPostImage: setPostImage
+      setPostImage: setPostImage,
+      newComment: newComment,
+      setNewComment: setNewComment,
+      postDate: postDate
     }
   }, props.children));
 } // id: Date.now(),
@@ -34174,6 +34182,14 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -34189,17 +34205,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function Feeds() {
   var _useContext = (0, _react.useContext)(_DataContext.Context),
       feed = _useContext.feed,
-      dispatch = _useContext.dispatch;
+      dispatch = _useContext.dispatch,
+      newComment = _useContext.newComment,
+      setNewComment = _useContext.setNewComment,
+      postDate = _useContext.postDate;
 
-  var _useState = (0, _react.useState)(""),
+  var _useState = (0, _react.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
-      newComment = _useState2[0],
-      setNewComment = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(0),
-      _useState4 = _slicedToArray(_useState3, 2),
-      likePost = _useState4[0],
-      setLikePost = _useState4[1];
+      likePost = _useState2[0],
+      setLikePost = _useState2[1];
 
   function likeFunction(e) {
     var buttonId = Number(e.target.id);
@@ -34213,16 +34227,21 @@ function Feeds() {
   }
 
   function handleComment(e) {
-    e.preventDefault(); // dispatch({[]})
-    // let comment = feed.map((post) => {
-    //   [post.comment,
-    //   {
-    //     new: newComment
-    //   }]
-    // });
-    // console.log(comment);
-
-    console.log("Yes");
+    e.preventDefault();
+    var buttonId = Number(e.target.id);
+    var findPost = feed.find(function (post) {
+      return post.id === buttonId;
+    });
+    var coms = {
+      commentorName: "Daniel",
+      commentorPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
+      text: newComment,
+      date: postDate.toDateString(),
+      id: Date.now()
+    };
+    setNewComment([].concat(_toConsumableArray(findPost.comments), [coms]));
+    findPost.comments = [].concat(_toConsumableArray(findPost.comments), [coms]);
+    setNewComment("");
   }
 
   return /*#__PURE__*/_react.default.createElement("div", null, feed.map(function (post) {
@@ -34250,15 +34269,16 @@ function Feeds() {
       });
     }), /*#__PURE__*/_react.default.createElement("form", {
       className: "comment-form",
-      onSubmit: handleComment
+      onSubmit: handleComment,
+      id: post.id
     }, /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
       placeholder: "Add a comment...",
+      value: newComment,
       onChange: function onChange(e) {
-        dispatch({
-          type: "COMMENT",
-          value: e.target.value
-        });
+        return (// dispatch({ type: "COMMENT", value: e.target.value });
+          setNewComment(e.currentTarget.value)
+        );
       }
     }), /*#__PURE__*/_react.default.createElement("button", {
       type: "submit",

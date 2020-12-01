@@ -3,10 +3,10 @@ import postList from "./post-list.json";
 
 const Context = React.createContext();
 function ContextProvider(props) {
-  const postDate =  new Date(Date.now());
+  const postDate = new Date(Date.now());
   const [postDescription, setPostDescription] = useState("");
-  const [postImage, setPostImage] =  useState("");
-  
+  const [postImage, setPostImage] = useState("");
+  const [newComment, setNewComment] = useState("");
   let [state, dispatch] = useReducer(
     (state, action) => {
       switch (action.type) {
@@ -16,34 +16,34 @@ function ContextProvider(props) {
             feed: action.feed,
           };
         }
+        case "COMMENT": {
+          return {
+            ...state,
+            comments: action.comments,
+          };
+        }
         case "ADD": {
           const newPost = {
             id: Date.now(),
             description: postDescription,
-            postPic:postImage,
-            userName: action.userName,
+            postPic: postImage,
+            userName: "Daniel",
             userPic:
               "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
             comments: [],
             date: postDate.toDateString(),
             like: 0,
           };
-          console.log(newPost);
+          console.log(state.comments);
           return {
             feed: [...state.feed, newPost],
-          };
-        }
-        case "COMMENT": {
-          return {
-            ...state,
-            newComment: action.newComment,
           };
         }
       }
     },
     {
       feed: [],
-      newComment: "",
+      comment: "",
     }
   );
 
@@ -55,7 +55,20 @@ function ContextProvider(props) {
   console.log(state.feed);
   return (
     <div>
-      <Context.Provider value={{ feed: state.feed, dispatch, postList, postDescription, setPostDescription, postImage, setPostImage }}>
+      <Context.Provider
+        value={{
+          feed: state.feed,
+          dispatch,
+          postList,
+          postDescription,
+          setPostDescription,
+          postImage,
+          setPostImage,
+          newComment,
+          setNewComment,
+          postDate
+        }}
+      >
         {props.children}
       </Context.Provider>
     </div>
