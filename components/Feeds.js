@@ -20,13 +20,13 @@ function Feeds() {
   function handleComment(e) {
     e.preventDefault();
     // dispatch({[]})
-    let comment = feed.map((post) => {
-      [post.comment,
-      {
-        new: newComment
-      }]
-    });
-    console.log(comment);
+    // let comment = feed.map((post) => {
+    //   [post.comment,
+    //   {
+    //     new: newComment
+    //   }]
+    // });
+    // console.log(comment);
     console.log("Yes");
   }
 

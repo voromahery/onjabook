@@ -33958,6 +33958,14 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -33981,6 +33989,18 @@ var Context = _react.default.createContext();
 exports.Context = Context;
 
 function ContextProvider(props) {
+  var postDate = new Date(Date.now());
+
+  var _useState = (0, _react.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      postDescription = _useState2[0],
+      setPostDescription = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      postImage = _useState4[0],
+      setPostImage = _useState4[1];
+
   var _useReducer = (0, _react.useReducer)(function (state, action) {
     switch (action.type) {
       case "POST":
@@ -33989,18 +34009,24 @@ function ContextProvider(props) {
             feed: action.feed
           });
         }
-      // case "ADD": {
-      //   return {
-      //   id: Date.now(),
-      //     description:,
-      //     postPic: ,
-      //     userName: ,
-      //     userPic: ,
-      //     comments: ,
-      //     date: ,
-      //     like: ,
-      //   }
-      // }
+
+      case "ADD":
+        {
+          var newPost = {
+            id: Date.now(),
+            description: postDescription,
+            postPic: postImage,
+            userName: action.userName,
+            userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
+            comments: [],
+            date: postDate.toDateString(),
+            like: 0
+          };
+          console.log(newPost);
+          return {
+            feed: [].concat(_toConsumableArray(state.feed), [newPost])
+          };
+        }
 
       case "COMMENT":
         {
@@ -34011,7 +34037,7 @@ function ContextProvider(props) {
     }
   }, {
     feed: [],
-    newComment: ''
+    newComment: ""
   }),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       state = _useReducer2[0],
@@ -34021,16 +34047,28 @@ function ContextProvider(props) {
     dispatch({
       type: "POST",
       feed: _postList.default
-    });
+    }); // dispatch({ type: "ADD", feed: state.feed, ...postList });
   }, []);
   console.log(state.feed);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
       feed: state.feed,
-      dispatch: dispatch
+      dispatch: dispatch,
+      postList: _postList.default,
+      postDescription: postDescription,
+      setPostDescription: setPostDescription,
+      postImage: postImage,
+      setPostImage: setPostImage
     }
   }, props.children));
-}
+} // id: Date.now(),
+// description: "action.description",
+// postPic: "action.postPic",
+// userName: "action.userName",
+// userPic: "action.userPic",
+// comments: "action.comments",
+// date: "new Date(Date.now).toDateString()",
+// like: "action.like",
 },{"react":"node_modules/react/index.js","./post-list.json":"post-list.json"}],"components/Post.js":[function(require,module,exports) {
 "use strict";
 
@@ -34176,13 +34214,14 @@ function Feeds() {
 
   function handleComment(e) {
     e.preventDefault(); // dispatch({[]})
+    // let comment = feed.map((post) => {
+    //   [post.comment,
+    //   {
+    //     new: newComment
+    //   }]
+    // });
+    // console.log(comment);
 
-    var comment = feed.map(function (post) {
-      [post.comment, {
-        new: newComment
-      }];
-    });
-    console.log(comment);
     console.log("Yes");
   }
 
@@ -34238,21 +34277,36 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _DataContext = require("../DataContext");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function AddPost() {
+  var _useContext = (0, _react.useContext)(_DataContext.Context),
+      feed = _useContext.feed,
+      dispatch = _useContext.dispatch,
+      postList = _useContext.postList,
+      setPostDescription = _useContext.setPostDescription,
+      postDescription = _useContext.postDescription,
+      postImage = _useContext.postImage,
+      setPostImage = _useContext.setPostImage;
+
   function addNEwPost(e) {
     e.preventDefault();
-    console.log("YEs"); // id: Date.now(),
-    //         description:,
-    //         postPic: ,
-    //         userName: ,
-    //         userPic: ,
-    //         comments: ,
-    //         date: ,
-    //         like: ,
+    dispatch(_objectSpread({
+      type: "ADD",
+      feed: feed
+    }, postList));
   }
 
   return /*#__PURE__*/_react.default.createElement("div", {
@@ -34261,11 +34315,21 @@ function AddPost() {
     className: "form-add",
     onSubmit: addNEwPost
   }, /*#__PURE__*/_react.default.createElement("textarea", {
-    placeholder: "Say what\u2019s on your mind..."
+    placeholder: "Say what\u2019s on your mind...",
+    name: "description",
+    value: postDescription,
+    onChange: function onChange(e) {
+      return setPostDescription(e.currentTarget.value);
+    }
   }), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("span", {
     className: "label-text"
   }, "Picture url :"), /*#__PURE__*/_react.default.createElement("input", {
-    type: "url"
+    type: "url",
+    name: "picture",
+    value: postImage,
+    onChange: function onChange(e) {
+      return setPostImage(e.currentTarget.value);
+    }
   })), /*#__PURE__*/_react.default.createElement("button", {
     className: "post-button"
   }, "Post")));
@@ -34273,7 +34337,7 @@ function AddPost() {
 
 var _default = AddPost;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"components/User.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../DataContext":"DataContext.js"}],"components/User.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
