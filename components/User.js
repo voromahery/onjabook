@@ -3,7 +3,15 @@ import React from 'react'
 function User() {
     return (
         <div>
-           <h1>User</h1> 
+           <p>Options : </p>
+           <form>
+               <label>Username : 
+                   <input type="text" placeholder="Type your username here"/>
+               </label>
+               <label>Profile picture : 
+                   <input type="url" placeholder="Paste a URL here"/>
+               </label>
+           </form>
         </div>
     )
 }

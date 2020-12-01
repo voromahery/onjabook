@@ -10,6 +10,12 @@ function ContextProvider(props) {
   let [state, dispatch] = useReducer(
     (state, action) => {
       switch (action.type) {
+        case "ADD_IDENTITY":
+          return {
+            ...state,
+            userName: action.userName,
+            userPic: action.userPic,
+          }
         case "POST": {
           return {
             ...state,
@@ -43,6 +49,8 @@ function ContextProvider(props) {
     },
     {
       feed: [],
+      userName: "",
+      userPic: "",
       comment: "",
     }
   );

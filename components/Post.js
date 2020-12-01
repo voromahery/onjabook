@@ -14,14 +14,14 @@ function Post({
   post,
 }) {
   const { feed } = useContext(Context);
-  const [likePost, setLikePost] = useState(like);
+  const [likePost, setLikePost] = useState(like.length);
 
   function likeFunction(id) {
     // const buttonId = Number(e.target.id);
     const findPost = feed.some((post) => userName === post.userName);
     if (findPost) {
-      setLikePost(like + 1);
-      console.log(likePost);
+      setLikePost(like.length);
+      // console.log(likePost);
     } else {
       setLikePost(like - 1);
     }
