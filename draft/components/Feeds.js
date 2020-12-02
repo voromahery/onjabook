@@ -4,9 +4,13 @@ import Comments from "./Comments";
 import { Context } from "../DataContext";
 
 function Feeds() {
-  const { feed, dispatch, newComment, setNewComment, postDate,currentUser } = useContext(
-    Context
-  );
+  const {
+    feed,
+    newComment,
+    setNewComment,
+    postDate,
+    currentUser,
+  } = useContext(Context);
 
   function handleComment(e) {
     e.preventDefault();
@@ -14,14 +18,13 @@ function Feeds() {
     const findPost = feed.find((post) => post.id === buttonId);
     const coms = {
       commentorName: currentUser.userName,
-      commentorPic:currentUser.userPic,
+      commentorPic: currentUser.userPic,
       text: newComment,
       date: postDate.toDateString(),
       id: Date.now(),
     };
-    setNewComment([...findPost.comments, coms]);
     findPost.comments = [...findPost.comments, coms];
-    setNewComment("");
+    setNewComment([]);
   }
 
   return (
@@ -39,7 +42,6 @@ function Feeds() {
             postPic={post.postPic}
             like={post.like}
             postLike={post.postLike}
-            // likeFunction={likeFunction}
           />
           {post.comments.map((comment) => (
             <Comments
@@ -55,11 +57,9 @@ function Feeds() {
             <input
               type="text"
               placeholder="Add a comment..."
+              name="comment"
               value={newComment}
-              onChange={(e) =>
-                // dispatch({ type: "COMMENT", value: e.target.value });
-                setNewComment(e.currentTarget.value)
-              }
+              onChange={(e) => setNewComment(e.currentTarget.value)}
             />
             <button type="submit" className="post-comment">
               Comment

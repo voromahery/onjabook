@@ -13,36 +13,35 @@ function Post({
   likeFunction,
   post,
 }) {
-  const { feed, currentUser } = useContext(Context);
+  const {currentUser } = useContext(Context);
   const [likePost, setLikePost] = useState(like.length);
-
   const [userLiked, setUserLiked] = useState(post.like);
 
-  function likeFunction(id) {
-    // const buttonId = Number(e.target.id);
-    const findPost = feed.some((post) => userName === post.userName);
-    if (findPost) {
-      const newLiker = {
-        ...post,
-        like: [currentUser, ...like],
-      };
-      console.log(userLiked, "Yes");
+  function likeFunction() {
+    const findPost = userLiked.some((likes) => likes.userId === currentUser.userId);
+    const unlike = userLiked.filter((likes) => likes.userId !== currentUser.userId);
+
+    const newLiker = {
+      ...post,
+      like: [currentUser, ...like],
+    };
+
+    if (!findPost) {
       setUserLiked(newLiker.like);
       setLikePost(newLiker.like.length);
-      return newLiker;
+    } else {
+      setUserLiked(unlike);
+      setLikePost(unlike.length);
     }
   }
 
+ 
   return (
     <div className="post-visible">
       <div className="user">
         <div className="user">
-          <Link to="/user">
-            <img src={userPic} alt={userName} className="user-pic" />
-          </Link>
-          <Link to="/user">
-            <span>{userName}</span>
-          </Link>
+          <img src={userPic} alt={userName} className="user-pic" />
+          <span>{userName}</span>
         </div>
         <span>{date}</span>
       </div>
@@ -54,15 +53,13 @@ function Post({
         <button
           className="like-button"
           id={id}
-          onClick={() => likeFunction(post.id)}
+          onClick={() => likeFunction(post)}
         >
           Like
         </button>
         <span>{likePost}</span>{" "}
         {likePost > 0 &&
-          userLiked.map((user) => (
-            <li key={user.likeId}>{user.userName}</li>
-          ))}
+          userLiked.map((user) => <li key={user.likeId}>{user.userName}</li>)}
       </div>
     </div>
   );

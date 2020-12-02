@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Feeds from './components/Feeds';
-import AddPost from './components/Add-post';
+import AddPost from './components/AddPost';
 import User from "./components/User";
 
 function App() {

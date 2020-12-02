@@ -1,15 +1,12 @@
 import React, { useState, useEffect, useReducer } from "react";
 import postList from "./post-list.json";
-import userData from "./userData.json";
-
-console.log(userData, "USER");
 
 const Context = React.createContext();
 function ContextProvider(props) {
   const postDate = new Date(Date.now());
   const [postDescription, setPostDescription] = useState("");
   const [postImage, setPostImage] = useState("");
-  const [newComment, setNewComment] = useState("");
+  const [newComment, setNewComment] = useState([]);
   const [currentUser, setCurrentUser] = useState({
     userId: 211231,
     likeId: 21,
@@ -20,24 +17,10 @@ function ContextProvider(props) {
   let [state, dispatch] = useReducer(
     (state, action) => {
       switch (action.type) {
-
-        case "IDENTITY":
-          return {
-            ...state,
-            identity: action.userIdentity,
-          };
-
         case "POST": {
           return {
             ...state,
             feed: action.feed,
-          };
-        }
-
-        case "COMMENT": {
-          return {
-            ...state,
-            comments: action.comments,
           };
         }
 
@@ -71,7 +54,6 @@ function ContextProvider(props) {
 
   useEffect(() => {
     dispatch({ type: "POST", feed: postList });
-    // dispatch({ type: "ADD", feed: state.feed, ...postList });
   }, []);
 
   console.log(state.feed);
@@ -90,7 +72,7 @@ function ContextProvider(props) {
           setNewComment,
           postDate,
           currentUser,
-          setCurrentUser
+          setCurrentUser,
         }}
       >
         {props.children}
