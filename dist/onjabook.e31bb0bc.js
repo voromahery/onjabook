@@ -33929,6 +33929,14 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -33952,23 +33960,17 @@ var Context = _react.default.createContext();
 exports.Context = Context;
 
 function ContextProvider(props) {
-  var postDate = new Date(Date.now()); // const [postDescription, setPostDescription] = useState("");
-  // const [postImage, setPostImage] = useState("");
+  var postDate = new Date(Date.now());
 
-  var _useState = (0, _react.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      newComment = _useState2[0],
-      setNewComment = _useState2[1];
-
-  var _useState3 = (0, _react.useState)({
+  var _useState = (0, _react.useState)({
     userId: 211231,
     likeId: 21,
     userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
     userName: "Daniel"
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      currentUser = _useState4[0],
-      setCurrentUser = _useState4[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      currentUser = _useState2[0],
+      setCurrentUser = _useState2[1];
 
   var _useReducer = (0, _react.useReducer)(function (state, action) {
     switch (action.type) {
@@ -33978,6 +33980,24 @@ function ContextProvider(props) {
             feed: action.feed
           });
         }
+
+      case "ADD-COMMENT":
+        {
+          action.postId, action.comments;
+          var newComment = state.feed.map(function (post) {
+            if (post.postId === action.postId) {
+              // update the post
+              return _objectSpread(_objectSpread({}, post), {}, {
+                comments: [].concat(_toConsumableArray(post.comments), [action.comments])
+              });
+            }
+
+            return post;
+          });
+          return _objectSpread(_objectSpread({}, state), {}, {
+            feed: newComment
+          });
+        }
     }
   }, {
     posts: [],
@@ -33985,7 +34005,7 @@ function ContextProvider(props) {
     feed: [],
     userName: "",
     userPic: "",
-    comment: ""
+    comments: []
   }),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       state = _useReducer2[0],
@@ -33997,18 +34017,12 @@ function ContextProvider(props) {
       feed: _postList.default
     });
   }, []);
+  console.log(state.comments, "COMMENTS");
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
       feed: state.feed,
-      posts: state.posts,
       dispatch: dispatch,
       postList: _postList.default,
-      // postDescription,
-      // setPostDescription,
-      // postImage,
-      // setPostImage,
-      newComment: newComment,
-      setNewComment: setNewComment,
       postDate: postDate,
       currentUser: currentUser,
       setCurrentUser: setCurrentUser
@@ -34253,10 +34267,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function Feeds() {
   var _useContext = (0, _react.useContext)(_DataContext.Context),
       feed = _useContext.feed,
-      newComment = _useContext.newComment,
-      setNewComment = _useContext.setNewComment,
       postDate = _useContext.postDate,
-      currentUser = _useContext.currentUser;
+      currentUser = _useContext.currentUser,
+      dispatch = _useContext.dispatch;
 
   function handleComment(e) {
     e.preventDefault();
@@ -34267,12 +34280,16 @@ function Feeds() {
     var coms = {
       commentorName: currentUser.userName,
       commentorPic: currentUser.userPic,
-      text: newComment,
+      text: e.target.comment.value,
       date: postDate.toDateString(),
       id: Date.now()
     };
     findPost.comments = [].concat(_toConsumableArray(findPost.comments), [coms]);
-    setNewComment([]);
+    console.log(findPost.comments);
+    dispatch({
+      type: "ADD-COMMENT",
+      comments: [findPost.comments]
+    });
   }
 
   return /*#__PURE__*/_react.default.createElement("div", null, feed.map(function (post) {
@@ -34306,9 +34323,8 @@ function Feeds() {
       type: "text",
       placeholder: "Add a comment...",
       name: "comment",
-      value: newComment,
       onChange: function onChange(e) {
-        return setNewComment(e.currentTarget.value);
+        return e.currentTarget.value;
       }
     }), /*#__PURE__*/_react.default.createElement("button", {
       type: "submit",
@@ -34351,13 +34367,7 @@ function AddPost() {
   var _useContext = (0, _react.useContext)(_DataContext.Context),
       feed = _useContext.feed,
       dispatch = _useContext.dispatch,
-      postList = _useContext.postList,
-      setPostDescription = _useContext.setPostDescription,
-      postDescription = _useContext.postDescription,
-      postImage = _useContext.postImage,
-      setPostImage = _useContext.setPostImage,
-      postDate = _useContext.postDate,
-      posts = _useContext.posts;
+      postDate = _useContext.postDate;
 
   function addNEwPost(e) {
     e.preventDefault();
@@ -34384,8 +34394,7 @@ function AddPost() {
     onSubmit: addNEwPost
   }, /*#__PURE__*/_react.default.createElement("textarea", {
     placeholder: "Say what\u2019s on your mind...",
-    name: "description" // value={postDescription}
-    ,
+    name: "description",
     onChange: function onChange(e) {
       return e.currentTarget.value;
     }

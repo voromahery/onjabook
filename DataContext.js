@@ -4,9 +4,6 @@ import postList from "./post-list.json";
 const Context = React.createContext();
 function ContextProvider(props) {
   const postDate = new Date(Date.now());
-  // const [postDescription, setPostDescription] = useState("");
-  // const [postImage, setPostImage] = useState("");
-  const [newComment, setNewComment] = useState([]);
   const [currentUser, setCurrentUser] = useState({
     userId: 211231,
     likeId: 21,
@@ -23,6 +20,24 @@ function ContextProvider(props) {
             feed: action.feed,
           };
         }
+        case "ADD-COMMENT": {
+          action.postId,
+					action.comments
+          const newComment = state.feed.map(post => {
+						if (post.postId === action.postId) {
+							// update the post
+							return {
+								...post,
+								comments: [...post.comments, action.comments],
+							};
+						}
+						return post;
+					});
+					return {
+						...state,
+						feed: newComment,
+					};
+        }
       }
     },
     {
@@ -31,7 +46,7 @@ function ContextProvider(props) {
       feed: [],
       userName: "",
       userPic: "",
-      comment: "",
+      comments: [],
     }
   );
 
@@ -39,20 +54,15 @@ function ContextProvider(props) {
     dispatch({ type: "POST", feed: postList, });
   }, []);
 
+
+  console.log(state.comments,"COMMENTS");
   return (
     <div>
       <Context.Provider
         value={{
           feed: state.feed,
-          posts: state.posts,
           dispatch,
           postList,
-          // postDescription,
-          // setPostDescription,
-          // postImage,
-          // setPostImage,
-          newComment,
-          setNewComment,
           postDate,
           currentUser,
           setCurrentUser,

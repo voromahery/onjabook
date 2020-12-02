@@ -4,13 +4,7 @@ function AddPost() {
   const {
     feed,
     dispatch,
-    postList,
-    setPostDescription,
-    postDescription,
-    postImage,
-    setPostImage,
     postDate,
-    posts,
   } = useContext(Context);
 
   function addNEwPost(e) {
@@ -35,7 +29,6 @@ function AddPost() {
         <textarea
           placeholder="Say what’s on your mind..."
           name="description"
-          // value={postDescription}
           onChange={(e) => e.currentTarget.value}
         />
         <label>
