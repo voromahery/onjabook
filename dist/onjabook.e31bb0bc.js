@@ -34168,10 +34168,10 @@ function Post(_ref) {
 
     function likeFunction() {
       var findPost = userLiked.some(function (likes) {
-        return likes.userId === 211231;
+        return likes.userId === currentUser.userId;
       });
       var unlike = userLiked.filter(function (likes) {
-        return likes.userId !== 211231;
+        return likes.userId !== currentUser.userId;
       });
 
       var newLiker = _objectSpread(_objectSpread({}, post), {}, {

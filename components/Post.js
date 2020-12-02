@@ -18,8 +18,8 @@ function Post({
   const [userLiked, setUserLiked] = useState(post.like);
 
   function likeFunction() {
-    const findPost = userLiked.some((likes) => likes.userId === 211231);
-    const unlike = userLiked.filter((likes) => likes.userId !== 211231);
+    const findPost = userLiked.some((likes) => likes.userId === currentUser.userId);
+    const unlike = userLiked.filter((likes) => likes.userId !== currentUser.userId);
 
     const newLiker = {
       ...post,
