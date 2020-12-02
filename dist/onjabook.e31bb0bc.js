@@ -33972,7 +33972,7 @@ function ContextProvider(props) {
       postImage = _useState4[0],
       setPostImage = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(""),
+  var _useState5 = (0, _react.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
       newComment = _useState6[0],
       setNewComment = _useState6[1];
@@ -34153,7 +34153,6 @@ function Post(_ref) {
       post = _ref.post;
   return function (likeFunction) {
     var _useContext = (0, _react.useContext)(_DataContext.Context),
-        feed = _useContext.feed,
         currentUser = _useContext.currentUser;
 
     var _useState = (0, _react.useState)(like.length),
@@ -34206,7 +34205,11 @@ function Post(_ref) {
       onClick: function onClick() {
         return likeFunction(post);
       }
-    }, "Like"), /*#__PURE__*/_react.default.createElement("span", null, likePost), " "));
+    }, "Like"), /*#__PURE__*/_react.default.createElement("span", null, likePost), " ", likePost > 0 && userLiked.map(function (user) {
+      return /*#__PURE__*/_react.default.createElement("li", {
+        key: user.likeId
+      }, user.userName);
+    })));
   }(likeFunction);
 }
 
@@ -34283,7 +34286,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function Feeds() {
   var _useContext = (0, _react.useContext)(_DataContext.Context),
       feed = _useContext.feed,
-      dispatch = _useContext.dispatch,
       newComment = _useContext.newComment,
       setNewComment = _useContext.setNewComment,
       postDate = _useContext.postDate,
@@ -34302,9 +34304,8 @@ function Feeds() {
       date: postDate.toDateString(),
       id: Date.now()
     };
-    setNewComment([].concat(_toConsumableArray(findPost.comments), [coms]));
     findPost.comments = [].concat(_toConsumableArray(findPost.comments), [coms]);
-    setNewComment("");
+    setNewComment([]);
   }
 
   return /*#__PURE__*/_react.default.createElement("div", null, feed.map(function (post) {
@@ -34320,8 +34321,7 @@ function Feeds() {
       date: post.date,
       postPic: post.postPic,
       like: post.like,
-      postLike: post.postLike // likeFunction={likeFunction}
-
+      postLike: post.postLike
     }), post.comments.map(function (comment) {
       return /*#__PURE__*/_react.default.createElement(_Comments.default, {
         key: comment.id,
@@ -34338,11 +34338,10 @@ function Feeds() {
     }, /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
       placeholder: "Add a comment...",
+      name: "comment",
       value: newComment,
       onChange: function onChange(e) {
-        return (// dispatch({ type: "COMMENT", value: e.target.value });
-          setNewComment(e.currentTarget.value)
-        );
+        return setNewComment(e.currentTarget.value);
       }
     }), /*#__PURE__*/_react.default.createElement("button", {
       type: "submit",
@@ -34580,7 +34579,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55452" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55881" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

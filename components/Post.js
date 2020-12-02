@@ -13,7 +13,7 @@ function Post({
   likeFunction,
   post,
 }) {
-  const { feed, currentUser } = useContext(Context);
+  const {currentUser } = useContext(Context);
   const [likePost, setLikePost] = useState(like.length);
   const [userLiked, setUserLiked] = useState(post.like);
 
@@ -58,8 +58,8 @@ function Post({
           Like
         </button>
         <span>{likePost}</span>{" "}
-        {/* {likePost > 0 &&
-          userLiked.map((user) => <li key={user.likeId}>{user.userName}</li>)} */}
+        {likePost > 0 &&
+          userLiked.map((user) => <li key={user.likeId}>{user.userName}</li>)}
       </div>
     </div>
   );

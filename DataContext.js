@@ -6,7 +6,7 @@ function ContextProvider(props) {
   const postDate = new Date(Date.now());
   const [postDescription, setPostDescription] = useState("");
   const [postImage, setPostImage] = useState("");
-  const [newComment, setNewComment] = useState("");
+  const [newComment, setNewComment] = useState([]);
   const [currentUser, setCurrentUser] = useState({
     userId: 211231,
     likeId: 21,
