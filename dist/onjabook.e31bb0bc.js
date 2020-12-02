@@ -33910,18 +33910,6 @@ module.exports = [{
     "id": 968567345734
   }]
 }];
-},{}],"userData.json":[function(require,module,exports) {
-module.exports = [{
-  "userId": 21231,
-  "userName": "Loïc",
-  "profilePictureUrl": "https://picsum.photos/100",
-  "birthDate": "13/09/1991"
-}, {
-  "userId": 1212222,
-  "userName": "Shaun",
-  "profilePictureUrl": "https://picsum.photos/100",
-  "birthDate": "13/09/1991"
-}];
 },{}],"DataContext.js":[function(require,module,exports) {
 "use strict";
 
@@ -33934,8 +33922,6 @@ exports.Context = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _postList = _interopRequireDefault(require("./post-list.json"));
-
-var _userData = _interopRequireDefault(require("./userData.json"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33968,8 +33954,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-console.log(_userData.default, "USER");
 
 var Context = _react.default.createContext();
 
@@ -34005,22 +33989,10 @@ function ContextProvider(props) {
 
   var _useReducer = (0, _react.useReducer)(function (state, action) {
     switch (action.type) {
-      case "IDENTITY":
-        return _objectSpread(_objectSpread({}, state), {}, {
-          identity: action.userIdentity
-        });
-
       case "POST":
         {
           return _objectSpread(_objectSpread({}, state), {}, {
             feed: action.feed
-          });
-        }
-
-      case "COMMENT":
-        {
-          return _objectSpread(_objectSpread({}, state), {}, {
-            comments: action.comments
           });
         }
 
@@ -34056,7 +34028,7 @@ function ContextProvider(props) {
     dispatch({
       type: "POST",
       feed: _postList.default
-    }); // dispatch({ type: "ADD", feed: state.feed, ...postList });
+    });
   }, []);
   console.log(state.feed);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(Context.Provider, {
@@ -34076,7 +34048,7 @@ function ContextProvider(props) {
     }
   }, props.children));
 }
-},{"react":"node_modules/react/index.js","./post-list.json":"post-list.json","./userData.json":"userData.json"}],"components/Header.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./post-list.json":"post-list.json"}],"components/Header.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34179,7 +34151,7 @@ function Post(_ref) {
       id = _ref.id,
       likeFunction = _ref.likeFunction,
       post = _ref.post;
-  return function (id, likeFunction) {
+  return function (likeFunction) {
     var _useContext = (0, _react.useContext)(_DataContext.Context),
         feed = _useContext.feed,
         currentUser = _useContext.currentUser;
@@ -34194,21 +34166,24 @@ function Post(_ref) {
         userLiked = _useState4[0],
         setUserLiked = _useState4[1];
 
-    function likeFunction(id) {
-      // const buttonId = Number(e.target.id);
-      var findPost = feed.some(function (post) {
-        return userName === post.userName;
+    function likeFunction() {
+      var findPost = userLiked.some(function (likes) {
+        return likes.userId === 211231;
+      });
+      var unlike = userLiked.filter(function (likes) {
+        return likes.userId !== 211231;
       });
 
-      if (findPost) {
-        var newLiker = _objectSpread(_objectSpread({}, post), {}, {
-          like: [currentUser].concat(_toConsumableArray(like))
-        });
+      var newLiker = _objectSpread(_objectSpread({}, post), {}, {
+        like: [currentUser].concat(_toConsumableArray(like))
+      });
 
-        console.log(userLiked, "Yes");
+      if (!findPost) {
         setUserLiked(newLiker.like);
         setLikePost(newLiker.like.length);
-        return newLiker;
+      } else {
+        setUserLiked(unlike);
+        setLikePost(unlike.length);
       }
     }
 
@@ -34218,29 +34193,21 @@ function Post(_ref) {
       className: "user"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "user"
-    }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-      to: "/user"
     }, /*#__PURE__*/_react.default.createElement("img", {
       src: userPic,
       alt: userName,
       className: "user-pic"
-    })), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-      to: "/user"
-    }, /*#__PURE__*/_react.default.createElement("span", null, userName))), /*#__PURE__*/_react.default.createElement("span", null, date)), /*#__PURE__*/_react.default.createElement("article", null, /*#__PURE__*/_react.default.createElement("p", null, postText), /*#__PURE__*/_react.default.createElement("img", {
+    }), /*#__PURE__*/_react.default.createElement("span", null, userName)), /*#__PURE__*/_react.default.createElement("span", null, date)), /*#__PURE__*/_react.default.createElement("article", null, /*#__PURE__*/_react.default.createElement("p", null, postText), /*#__PURE__*/_react.default.createElement("img", {
       src: postPic,
       alt: "post"
     })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
       className: "like-button",
       id: id,
       onClick: function onClick() {
-        return likeFunction(post.id);
+        return likeFunction(post);
       }
-    }, "Like"), /*#__PURE__*/_react.default.createElement("span", null, likePost), " ", likePost > 0 && userLiked.map(function (user) {
-      return /*#__PURE__*/_react.default.createElement("li", {
-        key: user.likeId
-      }, user.userName);
-    })));
-  }(id, likeFunction);
+    }, "Like"), /*#__PURE__*/_react.default.createElement("span", null, likePost), " "));
+  }(likeFunction);
 }
 
 var _default = Post;
@@ -34270,15 +34237,11 @@ function Comments(_ref) {
     className: "user"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "user"
-  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/user"
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: authorPic,
     alt: author,
     className: "user-pic"
-  })), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/user"
-  }, /*#__PURE__*/_react.default.createElement("span", null, author))), /*#__PURE__*/_react.default.createElement("span", null, authorDate)), /*#__PURE__*/_react.default.createElement("p", null, authorText)));
+  }), /*#__PURE__*/_react.default.createElement("span", null, author)), /*#__PURE__*/_react.default.createElement("span", null, authorDate)), /*#__PURE__*/_react.default.createElement("p", null, authorText)));
 }
 
 var _default = Comments;
@@ -34617,7 +34580,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60446" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55452" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
