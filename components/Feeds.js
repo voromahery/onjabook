@@ -4,7 +4,7 @@ import Comments from "./Comments";
 import { Context } from "../DataContext";
 
 function Feeds() {
-  const { feed, dispatch, newComment, setNewComment, postDate } = useContext(
+  const { feed, dispatch, newComment, setNewComment, postDate,currentUser } = useContext(
     Context
   );
 
@@ -13,9 +13,8 @@ function Feeds() {
     const buttonId = Number(e.target.id);
     const findPost = feed.find((post) => post.id === buttonId);
     const coms = {
-      commentorName: "Daniel",
-      commentorPic:
-        "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
+      commentorName: currentUser.userName,
+      commentorPic:currentUser.userPic,
       text: newComment,
       date: postDate.toDateString(),
       id: Date.now(),
