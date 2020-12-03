@@ -33988,7 +33988,7 @@ function ContextProvider(props) {
             if (post.postId === action.postId) {
               // update the post
               return _objectSpread(_objectSpread({}, post), {}, {
-                comments: [].concat(_toConsumableArray(post.comments), [action.comments])
+                comments: _toConsumableArray(post.comments)
               });
             }
 
@@ -34285,7 +34285,6 @@ function Feeds() {
       id: Date.now()
     };
     findPost.comments = [].concat(_toConsumableArray(findPost.comments), [coms]);
-    console.log(findPost.comments);
     dispatch({
       type: "ADD-COMMENT",
       comments: [findPost.comments]
@@ -34572,7 +34571,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55434" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50174" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

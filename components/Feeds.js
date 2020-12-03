@@ -23,7 +23,6 @@ function Feeds() {
       id: Date.now(),
     };
     findPost.comments = [...findPost.comments, coms];
-    console.log(findPost.comments );
     dispatch({ type: "ADD-COMMENT", comments: [findPost.comments] });
   }
 

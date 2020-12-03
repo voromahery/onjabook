@@ -28,7 +28,7 @@ function ContextProvider(props) {
 							// update the post
 							return {
 								...post,
-								comments: [...post.comments, action.comments],
+								comments: [...post.comments],
 							};
 						}
 						return post;
