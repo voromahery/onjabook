@@ -33918,15 +33918,15 @@ module.exports = [{
 }];
 },{}],"userData.json":[function(require,module,exports) {
 module.exports = [{
-  "userId": "1",
-  "likeId": "3",
+  "userId": 1,
+  "likeId": 3,
   "userName": "Daniel",
   "profilePictureUrl": "https://picsum.photos/100",
   "birthDate": "13/12/1992"
 }, {
-  "userId": "2",
+  "userId": 2,
   "userName": "Kaneki",
-  "likeId": "2",
+  "likeId": 2,
   "profilePictureUrl": "https://picsum.photos/100",
   "birthDate": "01/01/1944"
 }];
@@ -34041,7 +34041,7 @@ function ContextProvider(props) {
   }, {
     userIdentity: [],
     feed: [],
-    currentUser: "1",
+    currentUser: 1,
     users: [],
     comments: []
   }),
@@ -34637,7 +34637,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50035" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50374" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

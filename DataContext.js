@@ -60,7 +60,7 @@ function ContextProvider(props) {
     {
       userIdentity: [],
       feed: [],
-      currentUser: "1",
+      currentUser: 1,
       users: [],
       comments: [],
     }
