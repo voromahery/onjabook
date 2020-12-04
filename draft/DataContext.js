@@ -4,13 +4,10 @@ import postList from "./post-list.json";
 const Context = React.createContext();
 function ContextProvider(props) {
   const postDate = new Date(Date.now());
-  const [postDescription, setPostDescription] = useState("");
-  const [postImage, setPostImage] = useState("");
-  const [newComment, setNewComment] = useState([]);
   const [currentUser, setCurrentUser] = useState({
     userId: 211231,
-    likeId: 21,
-    userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
+    likeId: 211231,
+    userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.webp",
     userName: "Daniel",
   });
 
@@ -23,53 +20,50 @@ function ContextProvider(props) {
             feed: action.feed,
           };
         }
-
-        case "ADD": {
-          const newPost = {
-            id: Date.now(),
-            description: postDescription,
-            postPic: postImage,
-            userName: "Daniel",
-            userPic:
-              "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
-            comments: [],
-            date: postDate.toDateString(),
-            like: [],
-          };
-
-          return {
-            feed: [...state.feed, newPost],
-          };
+        case "ADD-COMMENT": {
+          action.postId,
+					action.comments
+          const newComment = state.feed.map(post => {
+						if (post.postId === action.postId) {
+							// update the post
+							return {
+								...post,
+								comments: [...post.comments],
+							};
+						}
+						return post;
+					});
+					return {
+						...state,
+						feed: newComment,
+					};
         }
       }
     },
     {
+      posts: [],
       userIdentity: [],
       feed: [],
       userName: "",
       userPic: "",
-      comment: "",
+      comments: [],
     }
   );
 
   useEffect(() => {
-    dispatch({ type: "POST", feed: postList });
+    dispatch({ type: "POST", feed: postList, });
   }, []);
 
-  console.log(state.feed);
+
+  console.log(state.comments,"COMMENTS", state);
   return (
     <div>
       <Context.Provider
         value={{
           feed: state.feed,
+          state,
           dispatch,
           postList,
-          postDescription,
-          setPostDescription,
-          postImage,
-          setPostImage,
-          newComment,
-          setNewComment,
           postDate,
           currentUser,
           setCurrentUser,

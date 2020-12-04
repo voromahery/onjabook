@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useReducer } from "react";
 import postList from "./post-list.json";
-
+import userData from "./userData.json";
 const Context = React.createContext();
 function ContextProvider(props) {
   const postDate = new Date(Date.now());
-  const [currentUser, setCurrentUser] = useState({
-    userId: 211231,
-    likeId: 21,
-    userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
-    userName: "Daniel",
-  });
+  //  const [currentUser, setCurrentUser] = useState({
+  //    userId: 211231,
+  //    likeId: 211231,
+  //    userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.webp",
+  //    userName: "Daniel",
+  //  });
 
   let [state, dispatch] = useReducer(
     (state, action) => {
@@ -17,55 +17,77 @@ function ContextProvider(props) {
         case "POST": {
           return {
             ...state,
-            feed: action.feed,
+            feed: postList,
+            users: userData,
           };
         }
-        case "ADD-COMMENT": {
-          action.postId,
-					action.comments
-          const newComment = state.feed.map(post => {
-						if (post.postId === action.postId) {
-							// update the post
-							return {
-								...post,
-								comments: [...post.comments],
-							};
-						}
-						return post;
-					});
-					return {
-						...state,
-						feed: newComment,
-					};
+        case "ADD": {
+          return {
+            ...state,
+            feed: [...state.feed, action.newPost],
+          };
         }
+        case "UPDATE-PROFILE": {
+          const newUser = state.users.map((user) => {
+            if (user.userId === state.currentUser) {
+              return {
+                ...user,
+                userName: action.userName,
+                profilePictureUrl: action.profilePictureUrl,
+              };
+            }
+            return user;
+          });
+          return {
+            ...state,
+            users: newUser
+          };
+        }
+        // case "ADD-COMMENT": {
+        //   action.postId, action.comments;
+        //   const newComment = state.feed.map((post) => {
+        //     if (post.postId === action.postId) {
+        //       // update the post
+        //       return {
+        //         ...post,
+        //         comments: [...post.comments],
+        //       };
+        //     }
+        //     return post;
+        //   });
+        //   return {
+        //     ...state,
+        //     feed: newComment,
+        //   };
+        // }
       }
+      return state;
     },
     {
-      posts: [],
       userIdentity: [],
       feed: [],
-      userName: "",
-      userPic: "",
+      currentUser: "1",
+      users: [],
       comments: [],
     }
   );
 
   useEffect(() => {
-    dispatch({ type: "POST", feed: postList, });
+    dispatch({ type: "POST" });
   }, []);
 
-
-  console.log(state.comments,"COMMENTS");
+  console.log(state.users,"G");
+  // console.log(state.comments,"COMMENTS", state);
   return (
     <div>
       <Context.Provider
         value={{
-          feed: state.feed,
+          state,
           dispatch,
           postList,
           postDate,
-          currentUser,
-          setCurrentUser,
+          //  currentUser,
+          //  setCurrentUser,
         }}
       >
         {props.children}

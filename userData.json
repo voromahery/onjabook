@@ -1,0 +1,14 @@
+[
+  {
+      "userId": "1",
+      "userName": "Daniel",
+      "profilePictureUrl": "https://picsum.photos/100",
+      "birthDate": "13/12/1992"
+  },
+  {
+      "userId": "2",
+      "userName": "Kaneki",
+      "profilePictureUrl": "https://picsum.photos/100",
+      "birthDate": "01/01/1944"
+  }
+]

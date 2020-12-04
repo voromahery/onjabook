@@ -11,8 +11,8 @@ function User() {
     e.preventDefault();
     const newIdentity = {
       userId: 211231,
-      likeId: 21,
-      userPic:userNewPic,
+      likeId: 211231,
+      userPic: userNewPic,
       userName: userNewName,
     };
     setCurrentUser(newIdentity);
@@ -24,11 +24,21 @@ function User() {
       <form onSubmit={handleIdentity}>
         <label>
           Username :
-          <input type="text" placeholder="Type your username here" value={userNewName} onChange={(e) => setUserNewName(e.currentTarget.value)}/>
+          <input
+            type="text"
+            placeholder="Type your username here"
+            value={userNewName}
+            onChange={(e) => setUserNewName(e.currentTarget.value)}
+          />
         </label>
         <label>
           Profile picture :
-          <input type="url" placeholder="Paste a URL here" value={userNewPic} onChange={(e) => setUserNewPic(e.currentTarget.value)} />
+          <input
+            type="url"
+            placeholder="Paste a URL here"
+            value={userNewPic}
+            onChange={(e) => setUserNewPic(e.currentTarget.value)}
+          />
         </label>
         <button>Save</button>
       </form>

@@ -1,25 +1,25 @@
 import React, { useContext } from "react";
 import { Context } from "../DataContext";
 function AddPost() {
-  const {
-    feed,
-    dispatch,
-    postDate,
-  } = useContext(Context);
-
+  const { state, dispatch, postDate } = useContext(Context);
+  const { feed, currentUser } = state;
   function addNEwPost(e) {
     e.preventDefault();
+    const form = e.target;
     const newPost = {
       id: Date.now(),
       description: e.target.description.value,
       postPic: e.target.picture.value,
       userName: "Daniel",
-      userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
+      userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.webp",
       comments: [],
       date: postDate.toDateString(),
       like: [],
+      userId: "currentUser",
     };
-    dispatch({ type: "POST", feed: [newPost, ...feed] });
+    dispatch({ type: "ADD", newPost: newPost });
+    console.log({newPost});
+    form.reset();
   }
 
   return (

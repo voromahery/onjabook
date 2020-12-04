@@ -13,13 +13,18 @@ function Post({
   likeFunction,
   post,
 }) {
-  const {currentUser } = useContext(Context);
+  const { state, dispatch } = useContext(Context);
+  const { feed, currentUser } = state;
   const [likePost, setLikePost] = useState(like.length);
   const [userLiked, setUserLiked] = useState(post.like);
 
   function likeFunction() {
-    const findPost = userLiked.some((likes) => likes.userId === currentUser.userId);
-    const unlike = userLiked.filter((likes) => likes.userId !== currentUser.userId);
+    const findPost = userLiked.some(
+      (likes) => likes.userId === currentUser.userId
+    );
+    const unlike = userLiked.filter(
+      (likes) => likes.userId !== currentUser.userId
+    );
 
     const newLiker = {
       ...post,
@@ -35,7 +40,6 @@ function Post({
     }
   }
 
- 
   return (
     <div className="post-visible">
       <div className="user">

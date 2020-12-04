@@ -1,9 +1,12 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../DataContext";
 
 function Header() {
-  const {currentUser} = useContext(Context)
+  const { state, dispatch } = useContext(Context);
+  const { currentUser, users } = state;
+  const currentUserData = users.find((user) => user.userId === currentUser);
+  console.log(currentUserData);
   return (
     <header>
       <h2>OnjaBook</h2>
@@ -17,14 +20,16 @@ function Header() {
           </li>
         </ul>
       </nav>
-      <div className="user">
-        <Link to="/user">
-          <span>{currentUser.userName}</span>
-        </Link>
-        <Link to="/user">
-          <img src={currentUser.userPic} className="user-pic" alt="" />
-        </Link>
-      </div>
+      {currentUserData && (
+        <div className="user">
+          <Link to="/user">
+            <span>{currentUserData.userName}</span>
+          </Link>
+          <Link to="/user">
+            <img src={currentUserData.profilePictureUrl} className="user-pic" alt="" />
+          </Link>
+        </div>
+      )}
     </header>
   );
 }

@@ -13,7 +13,7 @@ function Post({
   likeFunction,
   post,
 }) {
-  const {currentUser } = useContext(Context);
+  const {currentUser, feed } = useContext(Context);
   const [likePost, setLikePost] = useState(like.length);
   const [userLiked, setUserLiked] = useState(post.like);
 
@@ -35,13 +35,25 @@ function Post({
     }
   }
 
+let name="";
+let image=""
+
+const changeIdentity= feed.find(name => currentUser.userId === name.userId);
+
+if (changeIdentity) {
+  name = currentUser.userName;
+  image=currentUser.userPic;
+} else {
+  name=userName;
+  image=userPic;
+}
  
   return (
     <div className="post-visible">
       <div className="user">
         <div className="user">
-          <img src={userPic} alt={userName} className="user-pic" />
-          <span>{userName}</span>
+          <img src={image} alt={name} className="user-pic" />
+          <span>{name}</span>
         </div>
         <span>{date}</span>
       </div>

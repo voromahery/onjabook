@@ -4,16 +4,22 @@ function AddPost() {
   const {
     feed,
     dispatch,
-    postList,
-    setPostDescription,
-    postDescription,
-    postImage,
-    setPostImage
+    postDate,
   } = useContext(Context);
 
   function addNEwPost(e) {
     e.preventDefault();
-    dispatch({ type: "ADD", feed: feed, ...postList });
+    const newPost = {
+      id: Date.now(),
+      description: e.target.description.value,
+      postPic: e.target.picture.value,
+      userName: "Daniel",
+      userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.jpg",
+      comments: [],
+      date: postDate.toDateString(),
+      like: [],
+    };
+    dispatch({ type: "POST", feed: [newPost, ...feed] });
   }
 
   return (
@@ -23,12 +29,15 @@ function AddPost() {
         <textarea
           placeholder="Say what’s on your mind..."
           name="description"
-          value={postDescription}
-          onChange={(e) => setPostDescription(e.currentTarget.value)}
+          onChange={(e) => e.currentTarget.value}
         />
         <label>
           <span className="label-text">Picture url :</span>
-          <input type="url" name="picture" value={postImage} onChange={(e) => setPostImage(e.currentTarget.value)}/>
+          <input
+            type="url"
+            name="picture"
+            onChange={(e) => e.currentTarget.value}
+          />
         </label>
         <button className="post-button">Post</button>
       </form>

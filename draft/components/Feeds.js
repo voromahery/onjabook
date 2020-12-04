@@ -6,10 +6,9 @@ import { Context } from "../DataContext";
 function Feeds() {
   const {
     feed,
-    newComment,
-    setNewComment,
     postDate,
     currentUser,
+    dispatch,
   } = useContext(Context);
 
   function handleComment(e) {
@@ -19,12 +18,13 @@ function Feeds() {
     const coms = {
       commentorName: currentUser.userName,
       commentorPic: currentUser.userPic,
-      text: newComment,
+      text: e.target.comment.value,
       date: postDate.toDateString(),
       id: Date.now(),
     };
     findPost.comments = [...findPost.comments, coms];
-    setNewComment([]);
+    console.log(findPost.comments);
+    dispatch({ type: "ADD-COMMENT", comments: [findPost.comments] });
   }
 
   return (
@@ -58,8 +58,7 @@ function Feeds() {
               type="text"
               placeholder="Add a comment..."
               name="comment"
-              value={newComment}
-              onChange={(e) => setNewComment(e.currentTarget.value)}
+              onChange={(e) => e.currentTarget.value}
             />
             <button type="submit" className="post-comment">
               Comment

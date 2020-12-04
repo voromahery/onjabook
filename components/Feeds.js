@@ -4,13 +4,8 @@ import Comments from "./Comments";
 import { Context } from "../DataContext";
 
 function Feeds() {
-  const {
-    feed,
-    postDate,
-    currentUser,
-    dispatch,
-  } = useContext(Context);
-
+  const { state, postDate, currentUser, dispatch } = useContext(Context);
+  const { feed } = state;
   function handleComment(e) {
     e.preventDefault();
     const buttonId = Number(e.target.id);
@@ -23,6 +18,7 @@ function Feeds() {
       id: Date.now(),
     };
     findPost.comments = [...findPost.comments, coms];
+    console.log(findPost.comments);
     dispatch({ type: "ADD-COMMENT", comments: [findPost.comments] });
   }
 
