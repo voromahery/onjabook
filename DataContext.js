@@ -4,12 +4,6 @@ import userData from "./userData.json";
 const Context = React.createContext();
 function ContextProvider(props) {
   const postDate = new Date(Date.now());
-  //  const [currentUser, setCurrentUser] = useState({
-  //    userId: 211231,
-  //    likeId: 211231,
-  //    userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.webp",
-  //    userName: "Daniel",
-  //  });
 
   let [state, dispatch] = useReducer(
     (state, action) => {
@@ -40,26 +34,26 @@ function ContextProvider(props) {
           });
           return {
             ...state,
-            users: newUser
+            users: newUser,
           };
         }
-        // case "ADD-COMMENT": {
-        //   action.postId, action.comments;
-        //   const newComment = state.feed.map((post) => {
-        //     if (post.postId === action.postId) {
-        //       // update the post
-        //       return {
-        //         ...post,
-        //         comments: [...post.comments],
-        //       };
-        //     }
-        //     return post;
-        //   });
-        //   return {
-        //     ...state,
-        //     feed: newComment,
-        //   };
-        // }
+        case "ADD-COMMENT": {
+          action.postId, action.comments;
+          const newComment = state.feed.map((post) => {
+            if (post.postId === action.postId) {
+              //update the post
+              return {
+                ...post,
+                comments: [...post.comments],
+              };
+            }
+            return post;
+          });
+          return {
+            ...state,
+            feed: newComment,
+          };
+        }
       }
       return state;
     },
@@ -76,18 +70,15 @@ function ContextProvider(props) {
     dispatch({ type: "POST" });
   }, []);
 
-  console.log(state.users,"G");
-  // console.log(state.comments,"COMMENTS", state);
+  console.log(state.users, "G");
+
   return (
     <div>
       <Context.Provider
         value={{
           state,
           dispatch,
-          postList,
           postDate,
-          //  currentUser,
-          //  setCurrentUser,
         }}
       >
         {props.children}

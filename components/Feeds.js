@@ -4,19 +4,22 @@ import Comments from "./Comments";
 import { Context } from "../DataContext";
 
 function Feeds() {
-  const { state, postDate, currentUser, dispatch } = useContext(Context);
-  const { feed } = state;
+  const { state, postDate, dispatch } = useContext(Context);
+  const { feed, currentUser, users } = state;
+  const currentUserData = users.find((user) => user.userId === currentUser);
+
   function handleComment(e) {
     e.preventDefault();
     const buttonId = Number(e.target.id);
     const findPost = feed.find((post) => post.id === buttonId);
     const coms = {
-      commentorName: currentUser.userName,
-      commentorPic: currentUser.userPic,
+      commentorName: currentUserData.userName,
+      commentorPic: currentUserData.profilePictureUrl,
       text: e.target.comment.value,
       date: postDate.toDateString(),
       id: Date.now(),
     };
+    
     findPost.comments = [...findPost.comments, coms];
     console.log(findPost.comments);
     dispatch({ type: "ADD-COMMENT", comments: [findPost.comments] });

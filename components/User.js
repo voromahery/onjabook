@@ -37,7 +37,7 @@ function User() {
           <input
             type="text"
             placeholder="Type your username here"
-            value={userNewName}
+            // value={userNewName}
             onChange={(e) => setUserNewName(e.currentTarget.value)}
           />
         </label>
@@ -46,7 +46,7 @@ function User() {
           <input
             type="url"
             placeholder="Paste a URL here"
-            value={userNewPic}
+            // value={userNewPic}
             onChange={(e) => setUserNewPic(e.currentTarget.value)}
           />
         </label>

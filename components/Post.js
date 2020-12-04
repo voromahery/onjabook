@@ -14,26 +14,29 @@ function Post({
   post,
 }) {
   const { state, dispatch } = useContext(Context);
-  const { feed, currentUser } = state;
+  const { users, currentUser } = state;
   const [likePost, setLikePost] = useState(like.length);
   const [userLiked, setUserLiked] = useState(post.like);
+  const currentUserData = users.find((user) => user.userId === currentUser);
 
   function likeFunction() {
     const findPost = userLiked.some(
-      (likes) => likes.userId === currentUser.userId
+      (likes) => likes.userId === currentUserData.userId
     );
+
     const unlike = userLiked.filter(
-      (likes) => likes.userId !== currentUser.userId
+      (likes) => likes.userId !== currentUserData.userId
     );
 
     const newLiker = {
       ...post,
-      like: [currentUser, ...like],
+      like: [currentUserData, ...like],
     };
 
     if (!findPost) {
       setUserLiked(newLiker.like);
       setLikePost(newLiker.like.length);
+      console.log(newLiker.like);
     } else {
       setUserLiked(unlike);
       setLikePost(unlike.length);
