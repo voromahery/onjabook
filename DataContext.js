@@ -54,11 +54,34 @@ function ContextProvider(props) {
             feed: newComment,
           };
         }
+        case "LIKE": {
+          const newPosts = state.posts.map((post) => {
+            if (post.postId === action.postId) {
+              return {
+                ...post,
+                like: post.like.filter(posts => posts.userId !== currentUser),
+              };
+            }
+            return post;
+          });
+          return { ...state, post: newPost };
+        }
+        case "UNLIKE": {
+          const newPosts = state.posts.map((post) => {
+            if (post.postId === action.postId) {
+              return {
+                ...post,
+                like: [...post.like, action.newLike],
+              };
+            }
+            return post;
+          });
+          return { ...state, post: newPost };
+        }
       }
       return state;
     },
     {
-      userIdentity: [],
       feed: [],
       currentUser: 1,
       users: [],

@@ -1,16 +1,16 @@
 [
   {
-      "userId": 1,
-      "likeId": 3,
-      "userName": "Daniel",
-      "profilePictureUrl": "https://picsum.photos/100",
-      "birthDate": "13/12/1992"
+    "userId": 1,
+    "likeId": 1,
+    "userName": "Daniel",
+    "profilePictureUrl": "https://picsum.photos/100",
+    "birthDate": "13/12/1992"
   },
   {
-      "userId":2,
-      "userName": "Kaneki",
-      "likeId":2, 
-      "profilePictureUrl": "https://picsum.photos/100",
-      "birthDate": "01/01/1944"
+    "userId": 2,
+    "userName": "Kaneki",
+    "likeId": 2,
+    "profilePictureUrl": "https://picsum.photos/100",
+    "birthDate": "01/01/1944"
   }
 ]

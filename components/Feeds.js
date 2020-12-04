@@ -1,7 +1,8 @@
 import React, { Fragment, useContext, useState } from "react";
+
+import { Context } from "../DataContext";
 import Post from "./Post";
 import Comments from "./Comments";
-import { Context } from "../DataContext";
 
 function Feeds() {
   const { state, postDate, dispatch } = useContext(Context);
@@ -16,7 +17,7 @@ function Feeds() {
       commentorName: currentUserData.userName,
       commentorPic: currentUserData.profilePictureUrl,
       text: e.target.comment.value,
-      date: postDate.toDateString(),
+      date: postDate.toLocaleDateString(),
       id: Date.now(),
     };
     

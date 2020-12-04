@@ -13,7 +13,7 @@ function AddPost() {
       userName: "Daniel",
       userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.webp",
       comments: [],
-      date: postDate.toDateString(),
+      date: postDate.toLocaleDateString(),
       like: [],
       userId: "currentUser",
     };

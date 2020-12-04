@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../DataContext";
-import { Link } from "react-router-dom";
+import likeIcon from "../icons/like.svg";
 
 function Post({
   userName,
@@ -43,6 +43,20 @@ function Post({
     }
   }
 
+  // function hasAlredyLikeThePost() {
+  //   return post.like.some((like) => like.userId === currentUser);
+  // }
+
+  // function hasAlredyLikeThePost() {}
+
+  // function handleNewLike() {
+  //   const newLike = {
+  //     likeId: Date.now(),
+  //     userId: currentUser,
+  //   };
+  //   dispatch({ type: "LIKE", newLike, postId: post.postId });
+  // }
+
   return (
     <div className="post-visible">
       <div className="user">
@@ -57,13 +71,12 @@ function Post({
         <img src={postPic} alt="post" />
       </article>
       <div>
-        <button
+        <img src={likeIcon}
           className="like-button"
           id={id}
           onClick={() => likeFunction(post)}
-        >
-          Like
-        </button>
+          alt=""
+        />
         <span>{likePost}</span>{" "}
         {likePost > 0 &&
           userLiked.map((user) => <li key={user.likeId}>{user.userName}</li>)}

@@ -1,7 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
+import React, {useContext} from "react";
+import {Context} from '../DataContext'
 function Comments({ author, authorPic, authorText, authorDate }) {
+  const { state, dispatch } = useContext(Context);
+	const { currentUser, users } = state;
+  const currentUserObj = users.find(user => user.userId === currentUser);
   return (
     <div className="comments">
       <div>

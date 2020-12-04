@@ -1,3 +1,7 @@
+body {
+  margin: auto;
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -17,6 +21,13 @@ header,
 
 header {
   flex-wrap: wrap;
+  background-color: #2d2dcf;
+}
+
+header h2,
+header a {
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .user-pic {
@@ -70,7 +81,7 @@ textarea {
 .post-visible,
 .comments,
 .comment-form,
-hr  {
+hr {
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
