@@ -41,6 +41,7 @@ function AddPost() {
             placeholder="Paste a URL here"
             name="picture"
             onChange={(e) => e.currentTarget.value}
+            required
           />
         </label>
         <button className="post-button">Post</button>
