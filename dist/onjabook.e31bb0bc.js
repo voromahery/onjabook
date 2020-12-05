@@ -34523,7 +34523,8 @@ function AddPost() {
     name: "picture",
     onChange: function onChange(e) {
       return e.currentTarget.value;
-    }
+    },
+    required: true
   })), /*#__PURE__*/_react.default.createElement("button", {
     className: "post-button"
   }, "Post")));
@@ -34703,7 +34704,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49514" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49717" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

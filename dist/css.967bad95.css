@@ -37,6 +37,7 @@ textarea,
 button,
 input {
   border: none;
+  outline: none;
 }
 
 button {
