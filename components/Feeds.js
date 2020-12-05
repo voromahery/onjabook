@@ -10,6 +10,7 @@ function Feeds() {
   const currentUserData = users.find((user) => user.userId === currentUser);
 
   function handleComment(e) {
+    const form = e.target;
     e.preventDefault();
 
     const buttonId = Number(e.target.id);
@@ -26,6 +27,7 @@ function Feeds() {
 
     findPost.comments = [...findPost.comments, coms];
     dispatch({ type: "ADD-COMMENT", comments: [findPost.comments] });
+    form.reset();
   }
 
   return (

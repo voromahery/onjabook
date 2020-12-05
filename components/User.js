@@ -18,12 +18,14 @@ function User() {
   }, [users]);
 
   function handleIdentity(e) {
+    const form = e.target;
     e.preventDefault();
     dispatch({
       type: "UPDATE-PROFILE",
       userName: userNewName,
       profilePictureUrl: userNewPic,
     });
+    form.reset();
   }
 
   return (
@@ -36,6 +38,7 @@ function User() {
             type="text"
             placeholder="Type your username here"
             onChange={(e) => setUserNewName(e.currentTarget.value)}
+            required
           />
         </label>
         <label>
