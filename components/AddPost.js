@@ -12,7 +12,7 @@ function AddPost() {
       description: e.target.description.value,
       postPic: e.target.picture.value,
       userName: currentUserData.userName,
-      userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.webp",
+      userPic: currentUserData.profilePictureUrl,
       comments: [],
       date: postDate.toLocaleDateString(),
       like: [],
