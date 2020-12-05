@@ -9,7 +9,9 @@ function Header() {
 
   return (
     <header>
-      <h2>OnjaBook</h2>
+      <Link to="/">
+        <h2>OnjaBook</h2>
+      </Link>
       <nav className="navigation">
         <ul className="navigation-list">
           <li className="list-item">
@@ -21,12 +23,16 @@ function Header() {
         </ul>
       </nav>
       {currentUserData && (
-        <div className="user">
+        <div className="user header-profile">
           <Link to="/user">
             <span>{currentUserData.userName}</span>
           </Link>
           <Link to="/user">
-            <img src={currentUserData.profilePictureUrl} className="user-pic" alt="" />
+            <img
+              src={currentUserData.profilePictureUrl}
+              className="user-pic"
+              alt=""
+            />
           </Link>
         </div>
       )}

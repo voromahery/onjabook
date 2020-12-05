@@ -20,7 +20,6 @@ ul {
 
 textarea,
 input {
-  width: 100%;
   border-radius: 8px;
   color: black;
   padding: 5px;
@@ -78,8 +77,12 @@ header {
   padding-bottom: 10px;
 }
 
+.header-profile span {
+  margin-right: 16px;
+}
+
 header h2 {
-    margin: 0;
+  margin: 0;
 }
 
 .navigation {
@@ -121,6 +124,7 @@ header h2 {
   padding-left: 5px;
   padding-right: 5px;
   border-radius: 12px;
+  max-width: 450px;
 }
 
 .comment-form,
@@ -129,10 +133,12 @@ header h2 {
 }
 
 .comment-form input {
+  width: 100%;
   outline: none;
   max-width: 300px;
 }
 
+.profile-form button,
 .comment-form button,
 .form-add button {
   border-radius: 12px;
@@ -141,35 +147,58 @@ header h2 {
   padding-left: 10px;
   padding-right: 10px;
   background-color: #2d2dcf;
+  text-shadow: 1px 1px 1px black;
+  box-shadow: inset 0px 0px 12px black, 0px 0px 8px black;
+}
+
+.form-add textarea,
+.form-add input {
+  width: -webkit-fill-available;
 }
 
 .form-add textarea {
   min-height: 130px;
 }
 
+.profile-form input,
 .form-add textarea,
 .form-add input {
-  max-width: 436px;
+  max-width: 440px;
+  box-shadow: inset 0px 0px 10px #3d3d45;
 }
 
+.profile-form input,
 .form-add input {
   height: 32px;
 }
 
 .form-add label,
-.form-add button {
+.form-add button,
+.profile-form label {
   margin-top: 12px;
   margin-bottom: 12px;
 }
 
 .form-add button {
-    margin-left: auto;
-    display: block;
+  margin-left: auto;
+  display: block;
 }
 
-.new-post {
+.new-post,
+.profile {
   max-width: 450px;
   margin: auto;
+}
+
+.profile-form label,
+.profile-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-form button {
+  align-self: flex-end;
+  max-width: fit-content;
 }
 
 @media (min-width: 600px) {
@@ -187,6 +216,12 @@ header h2 {
 
 .user {
   justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.profile-comment img,
+.profile-feed img {
+    margin-right: 16px;
 }
 
 .like,
@@ -215,6 +250,7 @@ header h2 {
   margin-top: 12px;
   margin-bottom: 12px;
   box-shadow: 0px 0px 8px #0d0c0c;
+  max-width: 800px;
 }
 
 @keyframes nod-icon {
@@ -250,8 +286,8 @@ header h2 {
     padding-bottom: 30px;
     padding-left: 32px;
     padding-right: 32px;
-    margin-left: 32px;
-    margin-right: 32px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 12px;
     margin-bottom: 12px;
   }

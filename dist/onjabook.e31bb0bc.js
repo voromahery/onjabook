@@ -34142,7 +34142,9 @@ function Header() {
   var currentUserData = users.find(function (user) {
     return user.userId === currentUser;
   });
-  return /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "OnjaBook"), /*#__PURE__*/_react.default.createElement("nav", {
+  return /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/"
+  }, /*#__PURE__*/_react.default.createElement("h2", null, "OnjaBook")), /*#__PURE__*/_react.default.createElement("nav", {
     className: "navigation"
   }, /*#__PURE__*/_react.default.createElement("ul", {
     className: "navigation-list"
@@ -34155,7 +34157,7 @@ function Header() {
   }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/post"
   }, "Add a post")))), currentUserData && /*#__PURE__*/_react.default.createElement("div", {
-    className: "user"
+    className: "user header-profile"
   }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/user"
   }, /*#__PURE__*/_react.default.createElement("span", null, currentUserData.userName)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
@@ -34276,7 +34278,7 @@ function Post(_ref) {
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "user"
     }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "user"
+      className: "user profile-feed"
     }, /*#__PURE__*/_react.default.createElement("img", {
       src: userPic,
       alt: userName,
@@ -34324,7 +34326,7 @@ function Comments(_ref) {
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "user"
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "user"
+    className: "user profile-comment"
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: authorPic,
     alt: author,
@@ -34515,6 +34517,7 @@ function AddPost() {
     className: "label-text"
   }, "Picture url :"), /*#__PURE__*/_react.default.createElement("input", {
     type: "url",
+    placeholder: "Paste a URL here",
     name: "picture",
     onChange: function onChange(e) {
       return e.currentTarget.value;
@@ -34592,19 +34595,20 @@ function User() {
     });
   }
 
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Options : "), /*#__PURE__*/_react.default.createElement("form", {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "profile"
+  }, /*#__PURE__*/_react.default.createElement("p", null, "Options : "), /*#__PURE__*/_react.default.createElement("form", {
+    className: "profile-form",
     onSubmit: handleIdentity
   }, /*#__PURE__*/_react.default.createElement("label", null, "Username :", /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
-    placeholder: "Type your username here" // value={userNewName}
-    ,
+    placeholder: "Type your username here",
     onChange: function onChange(e) {
       return setUserNewName(e.currentTarget.value);
     }
   })), /*#__PURE__*/_react.default.createElement("label", null, "Profile picture :", /*#__PURE__*/_react.default.createElement("input", {
     type: "url",
-    placeholder: "Paste a URL here" // value={userNewPic}
-    ,
+    placeholder: "Paste a URL here",
     onChange: function onChange(e) {
       return setUserNewPic(e.currentTarget.value);
     }

@@ -46,7 +46,7 @@ function Post({
   return (
     <div className="post-visible">
       <div className="user">
-        <div className="user">
+        <div className="user profile-feed">
           <img src={userPic} alt={userName} className="user-pic" />
           <span>{userName}</span>
         </div>

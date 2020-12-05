@@ -27,15 +27,14 @@ function User() {
   }
 
   return (
-    <div>
+    <div className="profile">
       <p>Options : </p>
-      <form onSubmit={handleIdentity}>
+      <form className="profile-form" onSubmit={handleIdentity}>
         <label>
           Username :
           <input
             type="text"
             placeholder="Type your username here"
-            // value={userNewName}
             onChange={(e) => setUserNewName(e.currentTarget.value)}
           />
         </label>
@@ -44,7 +43,6 @@ function User() {
           <input
             type="url"
             placeholder="Paste a URL here"
-            // value={userNewPic}
             onChange={(e) => setUserNewPic(e.currentTarget.value)}
           />
         </label>

@@ -6,7 +6,7 @@ function Comments({ author, authorPic, authorText, authorDate }) {
     <div className="comments">
       <div>
         <div className="user">
-          <div className="user">
+          <div className="user profile-comment">
             <img src={authorPic} alt={author} className="user-pic" />
             <span>{author}</span>
           </div>

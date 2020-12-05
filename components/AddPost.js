@@ -38,6 +38,7 @@ function AddPost() {
           <span className="label-text">Picture url :</span>
           <input
             type="url"
+            placeholder="Paste a URL here"
             name="picture"
             onChange={(e) => e.currentTarget.value}
           />
