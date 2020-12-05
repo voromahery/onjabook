@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { Context } from "../DataContext";
 function AddPost() {
   const { state, dispatch, postDate } = useContext(Context);
-  const { feed, currentUser } = state;
+  const { feed, currentUser, users } = state;
+  const currentUserData = users.find((user) => user.userId === currentUser);
   function addNEwPost(e) {
     e.preventDefault();
     const form = e.target;
@@ -10,12 +11,12 @@ function AddPost() {
       id: Date.now(),
       description: e.target.description.value,
       postPic: e.target.picture.value,
-      userName: "Daniel",
+      userName: currentUserData.userName,
       userPic: "https://portfolio-onja-daniel.netlify.app/images/daniel.webp",
       comments: [],
       date: postDate.toLocaleDateString(),
       like: [],
-      userId: "currentUser",
+      userId: currentUser,
     };
     dispatch({ type: "ADD", newPost: newPost });
     console.log({newPost});

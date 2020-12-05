@@ -14,11 +14,12 @@ function Feeds() {
     const buttonId = Number(e.target.id);
     const findPost = feed.find((post) => post.id === buttonId);
     const coms = {
-      commentorName: currentUserData.userName,
-      commentorPic: currentUserData.profilePictureUrl,
+      userName: currentUserData.userName,
+      profilePictureUrl: currentUserData.profilePictureUrl,
       text: e.target.comment.value,
       date: postDate.toLocaleDateString(),
       id: Date.now(),
+      userId: currentUser,
     };
     
     findPost.comments = [...findPost.comments, coms];
@@ -42,16 +43,19 @@ function Feeds() {
             like={post.like}
             postLike={post.postLike}
           />
-          {post.comments.map((comment) => (
+          {post.comments.map((comment) => {
+             const commentUserData = users.find((user) => user.userId === comment.userId);
+             return (
             <Comments
               key={comment.id}
               id={comment.id}
-              author={comment.commentorName}
-              authorPic={comment.commentorPic}
+              author={commentUserData.userName}
+              authorPic={commentUserData.profilePictureUrl}
               authorText={comment.text}
               authorDate={comment.date}
             />
-          ))}
+             
+      )})}
           <form className="comment-form" onSubmit={handleComment} id={post.id}>
             <input
               type="text"
