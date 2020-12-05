@@ -23,7 +23,7 @@ function Feeds() {
       id: Date.now(),
       userId: currentUser,
     };
-    
+
     findPost.comments = [...findPost.comments, coms];
     dispatch({ type: "ADD-COMMENT", comments: [findPost.comments] });
   }
@@ -31,7 +31,7 @@ function Feeds() {
   return (
     <div>
       {feed.map((post) => (
-        <Fragment key={post.id}>
+        <div className="feeds" key={post.id}>
           <Post
             post={post}
             key={post.id}
@@ -44,19 +44,23 @@ function Feeds() {
             like={post.like}
             postLike={post.postLike}
           />
-          {post.comments.map((comment) => {
-             const commentUserData = users.find((user) => user.userId === comment.userId);
-             return (
-            <Comments
-              key={comment.id}
-              id={comment.id}
-              author={commentUserData.userName}
-              authorPic={commentUserData.profilePictureUrl}
-              authorText={comment.text}
-              authorDate={comment.date}
-            />
-             
-      )})}
+          <div className="comment-displayed">
+            {post.comments.map((comment) => {
+              const commentUserData = users.find(
+                (user) => user.userId === comment.userId
+              );
+              return (
+                <Comments
+                  key={comment.id}
+                  id={comment.id}
+                  author={commentUserData.userName}
+                  authorPic={commentUserData.profilePictureUrl}
+                  authorText={comment.text}
+                  authorDate={comment.date}
+                />
+              );
+            })}
+          </div>
           <form className="comment-form" onSubmit={handleComment} id={post.id}>
             <input
               type="text"
@@ -69,7 +73,7 @@ function Feeds() {
             </button>
           </form>
           <hr></hr>
-        </Fragment>
+        </div>
       ))}
     </div>
   );

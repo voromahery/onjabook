@@ -1,0 +1,71 @@
+.comment-form {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 12px;
+}
+
+.comment-form,
+.comment-form input {
+  background-color: #ddd6d6;
+}
+
+.comment-form input {
+  outline: none;
+  max-width: 300px;
+}
+
+.comment-form button,
+.form-add button {
+  border-radius: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #2d2dcf;
+}
+
+.form-add textarea {
+  min-height: 130px;
+}
+
+.form-add textarea,
+.form-add input {
+  max-width: 436px;
+}
+
+.form-add input {
+  height: 32px;
+}
+
+.form-add label,
+.form-add button {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.form-add button {
+    margin-left: auto;
+    display: block;
+}
+
+.new-post {
+  max-width: 450px;
+  margin: auto;
+}
+
+@media (min-width: 600px) {
+  .form-add label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .form-add input {
+    max-width: 300px;
+  }
+}

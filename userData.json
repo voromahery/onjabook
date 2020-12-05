@@ -1,17 +1,16 @@
 [
   {
-    "userId": 1,
-    "likeId": 1,
     "userName": "Daniel",
     "profilePictureUrl": "https://portfolio-onja-daniel.netlify.app/images/daniel.webp",
-    "birthDate": "13/12/1992"
+    "likeId": 1,
+    "userId": 1
   },
   {
-    "userId": 2,
     "userName": "Kaneki",
-    "likeId": 2,
     "profilePictureUrl": "https://picsum.photos/100",
-    "birthDate": "01/01/1944"
+    "birthDate": "01/01/1944",
+    "likeId": 2,
+    "userId": 2
   },
   {
     "userName": "Luffy",
@@ -23,9 +22,7 @@
   {
     "userName": "Sasuke",
     "profilePictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHOoG16hiJGjDYU53AO1crfyo17L7yTHlkyw&usqp=CAU",
-    "text": "What are you doing?😂",
-    "date": "25/07/1996",
-    "id": 52526436436,
+    "birthdate": "25/07/1996",
     "userId": 2231,
     "likeId": 2231
   }

@@ -56,16 +56,21 @@ function Post({
         <p>{postText}</p>
         <img src={postPic} alt="post" />
       </article>
-      <div>
-        <img src={likeIcon}
-          className="like-button"
-          id={id}
-          onClick={() => likeFunction(post)}
-          alt=""
-        />
-        <span>{likePost}</span>{" "}
-        {likePost > 0 &&
-          userLiked.map((user) => <li key={user.likeId}>{user.userName}</li>)}
+      <div className="like-info">
+        <div className="like">
+          <img
+            src={likeIcon}
+            className="like-button"
+            id={id}
+            onClick={() => likeFunction(post)}
+            alt=""
+          />
+          <span>{likePost}</span>{" "}
+        </div>
+        {/* <ul>
+          {likePost > 0 &&
+            userLiked.map((user) => <li key={user.likeId}>{user.userName}</li>)}
+        </ul> */}
       </div>
     </div>
   );

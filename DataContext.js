@@ -93,8 +93,6 @@ function ContextProvider(props) {
     dispatch({ type: "POST" });
   }, []);
 
-  console.log(state.users, "G");
-
   return (
     <div>
       <Context.Provider
