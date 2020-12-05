@@ -15,6 +15,17 @@
   align-items: center;
 }
 
+.like {
+    position: relative;
+    padding-top: 10px;
+    padding-bottom: 0px;
+}
+
+.like span {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
 .user img {
   max-width: 32px;
   border-radius: 50%;
@@ -46,11 +57,6 @@
   }
 }
 
-.like-button {
-  max-width: 16px;
-  transition: all ease-in 0.3s;
-}
-
 .like-button:hover {
   max-width: 100%;
   transition: all ease-in 0.2s;
@@ -58,6 +64,12 @@
   animation-direction: alternate;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in;
+}
+
+.like-button,
+.like-button:active {
+  max-width: 16px;
+  transition: all ease-in 0.3s;
 }
 
 /* .like-info {
