@@ -11,8 +11,10 @@ function Feeds() {
 
   function handleComment(e) {
     e.preventDefault();
+
     const buttonId = Number(e.target.id);
     const findPost = feed.find((post) => post.id === buttonId);
+
     const coms = {
       userName: currentUserData.userName,
       profilePictureUrl: currentUserData.profilePictureUrl,
@@ -23,7 +25,6 @@ function Feeds() {
     };
     
     findPost.comments = [...findPost.comments, coms];
-    console.log(findPost.comments);
     dispatch({ type: "ADD-COMMENT", comments: [findPost.comments] });
   }
 

@@ -43,20 +43,6 @@ function Post({
     }
   }
 
-  // function hasAlredyLikeThePost() {
-  //   return post.like.some((like) => like.userId === currentUser);
-  // }
-
-  // function hasAlredyLikeThePost() {}
-
-  // function handleNewLike() {
-  //   const newLike = {
-  //     likeId: Date.now(),
-  //     userId: currentUser,
-  //   };
-  //   dispatch({ type: "LIKE", newLike, postId: post.postId });
-  // }
-
   return (
     <div className="post-visible">
       <div className="user">

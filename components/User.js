@@ -1,13 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../DataContext";
-import { Link } from "react-router-dom";
 
 function User() {
   const { state, dispatch } = useContext(Context);
   const { users, currentUser } = state;
   const [userNewPic, setUserNewPic] = useState("");
   const [userNewName, setUserNewName] = useState("");
-  console.log(users, "find");
 
   const currentUserData = users.find((user) => user.userId === currentUser) || {
     userNewName: "",

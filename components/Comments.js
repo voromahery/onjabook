@@ -1,9 +1,7 @@
-import React, {useContext} from "react";
-import {Context} from '../DataContext'
+import React from "react";
+
 function Comments({ author, authorPic, authorText, authorDate }) {
-  const { state, dispatch } = useContext(Context);
-	const { currentUser, users } = state;
-  const currentUserObj = users.find(user => user.userId === currentUser);
+
   return (
     <div className="comments">
       <div>

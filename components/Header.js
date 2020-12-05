@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { Context } from "../DataContext";
 
 function Header() {
-  const { state, dispatch } = useContext(Context);
+  const { state } = useContext(Context);
   const { currentUser, users } = state;
   const currentUserData = users.find((user) => user.userId === currentUser);
-  console.log(currentUserData);
+
   return (
     <header>
       <h2>OnjaBook</h2>

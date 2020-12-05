@@ -34136,15 +34136,13 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function Header() {
   var _useContext = (0, _react.useContext)(_DataContext.Context),
-      state = _useContext.state,
-      dispatch = _useContext.dispatch;
+      state = _useContext.state;
 
   var currentUser = state.currentUser,
       users = state.users;
   var currentUserData = users.find(function (user) {
     return user.userId === currentUser;
   });
-  console.log(currentUserData);
   return /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "OnjaBook"), /*#__PURE__*/_react.default.createElement("nav", {
     className: "navigation"
   }, /*#__PURE__*/_react.default.createElement("ul", {
@@ -34272,18 +34270,7 @@ function Post(_ref) {
         setUserLiked(unlike);
         setLikePost(unlike.length);
       }
-    } // function hasAlredyLikeThePost() {
-    //   return post.like.some((like) => like.userId === currentUser);
-    // }
-    // function hasAlredyLikeThePost() {}
-    // function handleNewLike() {
-    //   const newLike = {
-    //     likeId: Date.now(),
-    //     userId: currentUser,
-    //   };
-    //   dispatch({ type: "LIKE", newLike, postId: post.postId });
-    // }
-
+    }
 
     return /*#__PURE__*/_react.default.createElement("div", {
       className: "post-visible"
@@ -34324,29 +34311,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
-var _DataContext = require("../DataContext");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Comments(_ref) {
   var author = _ref.author,
       authorPic = _ref.authorPic,
       authorText = _ref.authorText,
       authorDate = _ref.authorDate;
-
-  var _useContext = (0, _react.useContext)(_DataContext.Context),
-      state = _useContext.state,
-      dispatch = _useContext.dispatch;
-
-  var currentUser = state.currentUser,
-      users = state.users;
-  var currentUserObj = users.find(function (user) {
-    return user.userId === currentUser;
-  });
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "comments"
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
@@ -34362,7 +34335,7 @@ function Comments(_ref) {
 
 var _default = Comments;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../DataContext":"DataContext.js"}],"components/Feeds.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"components/Feeds.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34424,7 +34397,6 @@ function Feeds() {
       userId: currentUser
     };
     findPost.comments = [].concat(_toConsumableArray(findPost.comments), [coms]);
-    console.log(findPost.comments);
     dispatch({
       type: "ADD-COMMENT",
       comments: [findPost.comments]
@@ -34499,8 +34471,7 @@ function AddPost() {
       dispatch = _useContext.dispatch,
       postDate = _useContext.postDate;
 
-  var feed = state.feed,
-      currentUser = state.currentUser,
+  var currentUser = state.currentUser,
       users = state.users;
   var currentUserData = users.find(function (user) {
     return user.userId === currentUser;
@@ -34522,9 +34493,6 @@ function AddPost() {
     };
     dispatch({
       type: "ADD",
-      newPost: newPost
-    });
-    console.log({
       newPost: newPost
     });
     form.reset();
@@ -34568,8 +34536,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _DataContext = require("../DataContext");
 
-var _reactRouterDom = require("react-router-dom");
-
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -34604,7 +34570,6 @@ function User() {
       userNewName = _useState4[0],
       setUserNewName = _useState4[1];
 
-  console.log(users, "find");
   var currentUserData = users.find(function (user) {
     return user.userId === currentUser;
   }) || {
@@ -34646,7 +34611,7 @@ function User() {
 
 var _default = User;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../DataContext":"DataContext.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../DataContext":"DataContext.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
