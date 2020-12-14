@@ -67,10 +67,6 @@ function Post({
           />
           <span>{likePost}</span>{" "}
         </div>
-        {/* <ul>
-          {likePost > 0 &&
-            userLiked.map((user) => <li key={user.likeId}>{user.userName}</li>)}
-        </ul> */}
       </div>
     </div>
   );

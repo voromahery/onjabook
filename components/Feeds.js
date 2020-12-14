@@ -3,6 +3,7 @@ import React, { Fragment, useContext, useState } from "react";
 import { Context } from "../DataContext";
 import Post from "./Post";
 import Comments from "./Comments";
+import addComment from '../icons/send-comment.svg';
 
 function Feeds() {
   const { state, postDate, dispatch } = useContext(Context);
@@ -71,7 +72,7 @@ function Feeds() {
               onChange={(e) => e.currentTarget.value}
             />
             <button type="submit" className="post-comment">
-              Comment
+            <img src={addComment} className="comment-icon" alt=""/>
             </button>
           </form>
           <hr></hr>

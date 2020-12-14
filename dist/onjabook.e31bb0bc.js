@@ -34336,7 +34336,9 @@ function Comments(_ref) {
 
 var _default = Comments;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"components/Feeds.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"icons/send-comment.svg":[function(require,module,exports) {
+module.exports = "/send-comment.85194eb6.svg";
+},{}],"components/Feeds.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34351,6 +34353,8 @@ var _DataContext = require("../DataContext");
 var _Post = _interopRequireDefault(require("./Post"));
 
 var _Comments = _interopRequireDefault(require("./Comments"));
+
+var _sendComment = _interopRequireDefault(require("../icons/send-comment.svg"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34449,13 +34453,17 @@ function Feeds() {
     }), /*#__PURE__*/_react.default.createElement("button", {
       type: "submit",
       className: "post-comment"
-    }, "Comment")), /*#__PURE__*/_react.default.createElement("hr", null));
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: _sendComment.default,
+      className: "comment-icon",
+      alt: ""
+    }))), /*#__PURE__*/_react.default.createElement("hr", null));
   }));
 }
 
 var _default = Feeds;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../DataContext":"DataContext.js","./Post":"components/Post.js","./Comments":"components/Comments.js"}],"components/AddPost.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../DataContext":"DataContext.js","./Post":"components/Post.js","./Comments":"components/Comments.js","../icons/send-comment.svg":"icons/send-comment.svg"}],"components/AddPost.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
