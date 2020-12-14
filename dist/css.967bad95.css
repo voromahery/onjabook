@@ -70,53 +70,6 @@ a {
   }
 }
 
-header {
-  background-color: #2d2dcf;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.header-profile span {
-  margin-right: 16px;
-}
-
-header h2 {
-  margin: 0;
-}
-
-.navigation {
-  flex-basis: 40%;
-}
-
-.list-item {
-  margin-top: 12px;
-  margin-bottom: 12px;
-}
-
-.post-visible {
-  padding: 15px;
-  box-shadow: 0px 0px 8px #0d0c0c;
-}
-
-@media (min-width: 300px) {
-  header,
-  .navigation-list {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-}
-
-@media (min-width: 600px) {
-  header {
-    padding-top: 16px;
-    padding-bottom: 16px;
-  }
-}
-
 .comment-form {
   display: flex;
   justify-content: space-between;
@@ -142,11 +95,11 @@ header h2 {
 .profile-form button,
 .comment-form button,
 .form-add button {
-  border-radius: 12px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
+  border-radius: 8px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
   background-color: #2d2dcf;
   text-shadow: 1px 1px 1px black;
   box-shadow: inset 0px 0px 12px black, 0px 0px 8px black;
@@ -200,6 +153,26 @@ header h2 {
 .profile-form button {
   align-self: flex-end;
   max-width: fit-content;
+}
+
+@media (min-width: 300px) {
+  .profile-form button,
+  .comment-form button,
+  .form-add button {
+    border-radius: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-shadow: 1px 1px 1px black;
+    box-shadow: inset 0px 0px 8px black, 0px 0px 8px black;
+  }
+
+  .new-post,
+  .profile {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
 @media (min-width: 600px) {
@@ -303,6 +276,59 @@ header h2 {
     margin-right: auto;
     margin-top: 12px;
     margin-bottom: 12px;
+  }
+}
+
+header {
+  background-color: #2d2dcf;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.header-profile {
+  justify-content: flex-end;
+}
+
+.header-profile span {
+  margin-right: 16px;
+}
+
+header h2 {
+  margin: 0;
+}
+
+.navigation {
+  flex-basis: 40%;
+}
+
+
+.list-item {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  /* margin-right: 10px; */
+}
+
+.post-visible {
+  padding: 15px;
+  box-shadow: 0px 0px 8px #0d0c0c;
+}
+
+@media (min-width: 300px) {
+  header,
+  .navigation-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 600px) {
+  header {
+    padding-top: 16px;
+    padding-bottom: 16px;
   }
 }
 
