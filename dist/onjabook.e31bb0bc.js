@@ -10814,7 +10814,7 @@ if ("development" !== "production") {
       }
 
       var eventName = 'on' + eventNameSuffix;
-      var isSupported = (eventName in document);
+      var isSupported = eventName in document;
 
       if (!isSupported) {
         var element = document.createElement('div');
@@ -31963,7 +31963,9 @@ function createReactContext(defaultValue, calculateChangedBits) {
 
   var contextProp = '__create-react-context-' + getUniqueId() + '__';
 
-  var Provider = /*#__PURE__*/function (_Component) {
+  var Provider =
+  /*#__PURE__*/
+  function (_Component) {
     (0, _inheritsLoose2.default)(Provider, _Component);
 
     function Provider() {
@@ -32015,7 +32017,9 @@ function createReactContext(defaultValue, calculateChangedBits) {
 
   Provider.childContextTypes = (_Provider$childContex = {}, _Provider$childContex[contextProp] = _propTypes.default.object.isRequired, _Provider$childContex);
 
-  var Consumer = /*#__PURE__*/function (_Component2) {
+  var Consumer =
+  /*#__PURE__*/
+  function (_Component2) {
     (0, _inheritsLoose2.default)(Consumer, _Component2);
 
     function Consumer() {
@@ -32697,7 +32701,9 @@ var createNamedContext = function createNamedContext(name) {
   return context;
 };
 
-var historyContext = /*#__PURE__*/createNamedContext("Router-History"); // TODO: Replace with React.createContext once we can assume React 16+
+var historyContext =
+/*#__PURE__*/
+createNamedContext("Router-History"); // TODO: Replace with React.createContext once we can assume React 16+
 
 exports.__HistoryContext = historyContext;
 
@@ -32707,14 +32713,18 @@ var createNamedContext$1 = function createNamedContext(name) {
   return context;
 };
 
-var context = /*#__PURE__*/createNamedContext$1("Router");
+var context =
+/*#__PURE__*/
+createNamedContext$1("Router");
 /**
  * The public API for putting history on context.
  */
 
 exports.__RouterContext = context;
 
-var Router = /*#__PURE__*/function (_React$Component) {
+var Router =
+/*#__PURE__*/
+function (_React$Component) {
   (0, _inheritsLoose2.default)(Router, _React$Component);
 
   Router.computeRootMatch = function computeRootMatch(pathname) {
@@ -32807,7 +32817,9 @@ if ("development" !== "production") {
  */
 
 
-var MemoryRouter = /*#__PURE__*/function (_React$Component) {
+var MemoryRouter =
+/*#__PURE__*/
+function (_React$Component) {
   (0, _inheritsLoose2.default)(MemoryRouter, _React$Component);
 
   function MemoryRouter() {
@@ -32850,7 +32862,9 @@ if ("development" !== "production") {
   };
 }
 
-var Lifecycle = /*#__PURE__*/function (_React$Component) {
+var Lifecycle =
+/*#__PURE__*/
+function (_React$Component) {
   (0, _inheritsLoose2.default)(Lifecycle, _React$Component);
 
   function Lifecycle() {
@@ -33096,7 +33110,9 @@ function evalChildrenDev(children, props, path) {
  */
 
 
-var Route = /*#__PURE__*/function (_React$Component) {
+var Route =
+/*#__PURE__*/
+function (_React$Component) {
   (0, _inheritsLoose2.default)(Route, _React$Component);
 
   function Route() {
@@ -33205,7 +33221,9 @@ function noop() {}
  */
 
 
-var StaticRouter = /*#__PURE__*/function (_React$Component) {
+var StaticRouter =
+/*#__PURE__*/
+function (_React$Component) {
   (0, _inheritsLoose2.default)(StaticRouter, _React$Component);
 
   function StaticRouter() {
@@ -33299,7 +33317,9 @@ if ("development" !== "production") {
  */
 
 
-var Switch = /*#__PURE__*/function (_React$Component) {
+var Switch =
+/*#__PURE__*/
+function (_React$Component) {
   (0, _inheritsLoose2.default)(Switch, _React$Component);
 
   function Switch() {
@@ -33556,7 +33576,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * The public API for a <Router> that uses HTML5 history.
  */
-var BrowserRouter = /*#__PURE__*/function (_React$Component) {
+var BrowserRouter =
+/*#__PURE__*/
+function (_React$Component) {
   (0, _inheritsLoose2.default)(BrowserRouter, _React$Component);
 
   function BrowserRouter() {
@@ -33603,7 +33625,9 @@ if ("development" !== "production") {
  */
 
 
-var HashRouter = /*#__PURE__*/function (_React$Component) {
+var HashRouter =
+/*#__PURE__*/
+function (_React$Component) {
   (0, _inheritsLoose2.default)(HashRouter, _React$Component);
 
   function HashRouter() {
@@ -34107,7 +34131,7 @@ function ContextProvider(props) {
       type: "POST"
     });
   }, []);
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(Context.Provider, {
+  return _react.default.createElement("div", null, _react.default.createElement(Context.Provider, {
     value: {
       state: state,
       dispatch: dispatch,
@@ -34142,27 +34166,27 @@ function Header() {
   var currentUserData = users.find(function (user) {
     return user.userId === currentUser;
   });
-  return /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+  return _react.default.createElement("header", null, _react.default.createElement(_reactRouterDom.Link, {
     to: "/"
-  }, /*#__PURE__*/_react.default.createElement("h2", null, "OnjaBook")), /*#__PURE__*/_react.default.createElement("nav", {
+  }, _react.default.createElement("h2", null, "OnjaBook")), _react.default.createElement("nav", {
     className: "navigation"
-  }, /*#__PURE__*/_react.default.createElement("ul", {
+  }, _react.default.createElement("ul", {
     className: "navigation-list"
-  }, /*#__PURE__*/_react.default.createElement("li", {
+  }, _react.default.createElement("li", {
     className: "list-item"
-  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+  }, _react.default.createElement(_reactRouterDom.Link, {
     to: "/"
-  }, "Feed")), /*#__PURE__*/_react.default.createElement("li", {
+  }, "Feed")), _react.default.createElement("li", {
     className: "list-item"
-  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+  }, _react.default.createElement(_reactRouterDom.Link, {
     to: "/post"
-  }, "Add a post")))), currentUserData && /*#__PURE__*/_react.default.createElement("div", {
+  }, "Add a post")))), currentUserData && _react.default.createElement("div", {
     className: "user header-profile"
-  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+  }, _react.default.createElement(_reactRouterDom.Link, {
     to: "/user"
-  }, /*#__PURE__*/_react.default.createElement("span", null, currentUserData.userName)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+  }, _react.default.createElement("span", null, currentUserData.userName)), _react.default.createElement(_reactRouterDom.Link, {
     to: "/user"
-  }, /*#__PURE__*/_react.default.createElement("img", {
+  }, _react.default.createElement("img", {
     src: currentUserData.profilePictureUrl,
     className: "user-pic",
     alt: ""
@@ -34273,24 +34297,24 @@ function Post(_ref) {
       }
     }
 
-    return /*#__PURE__*/_react.default.createElement("div", {
+    return _react.default.createElement("div", {
       className: "post-visible"
-    }, /*#__PURE__*/_react.default.createElement("div", {
+    }, _react.default.createElement("div", {
       className: "user"
-    }, /*#__PURE__*/_react.default.createElement("div", {
+    }, _react.default.createElement("div", {
       className: "user profile-feed"
-    }, /*#__PURE__*/_react.default.createElement("img", {
+    }, _react.default.createElement("img", {
       src: userPic,
       alt: userName,
       className: "user-pic"
-    }), /*#__PURE__*/_react.default.createElement("span", null, userName)), /*#__PURE__*/_react.default.createElement("span", null, date)), /*#__PURE__*/_react.default.createElement("article", null, /*#__PURE__*/_react.default.createElement("p", null, postText), /*#__PURE__*/_react.default.createElement("img", {
+    }), _react.default.createElement("span", null, userName)), _react.default.createElement("span", null, date)), _react.default.createElement("article", null, _react.default.createElement("p", null, postText), _react.default.createElement("img", {
       src: postPic,
       alt: "post"
-    })), /*#__PURE__*/_react.default.createElement("div", {
+    })), _react.default.createElement("div", {
       className: "like-info"
-    }, /*#__PURE__*/_react.default.createElement("div", {
+    }, _react.default.createElement("div", {
       className: "like"
-    }, /*#__PURE__*/_react.default.createElement("img", {
+    }, _react.default.createElement("img", {
       src: _like.default,
       className: "like-button",
       id: id,
@@ -34298,7 +34322,7 @@ function Post(_ref) {
         return likeFunction(post);
       },
       alt: ""
-    }), /*#__PURE__*/_react.default.createElement("span", null, likePost), " ")));
+    }), _react.default.createElement("span", null, likePost), " ")));
   }(likeFunction);
 }
 
@@ -34321,17 +34345,17 @@ function Comments(_ref) {
       authorPic = _ref.authorPic,
       authorText = _ref.authorText,
       authorDate = _ref.authorDate;
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return _react.default.createElement("div", {
     className: "comments"
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+  }, _react.default.createElement("div", null, _react.default.createElement("div", {
     className: "user"
-  }, /*#__PURE__*/_react.default.createElement("div", {
+  }, _react.default.createElement("div", {
     className: "user profile-comment"
-  }, /*#__PURE__*/_react.default.createElement("img", {
+  }, _react.default.createElement("img", {
     src: authorPic,
     alt: author,
     className: "user-pic"
-  }), /*#__PURE__*/_react.default.createElement("span", null, author)), /*#__PURE__*/_react.default.createElement("span", null, authorDate)), /*#__PURE__*/_react.default.createElement("p", null, authorText)));
+  }), _react.default.createElement("span", null, author)), _react.default.createElement("span", null, authorDate)), _react.default.createElement("p", null, authorText)));
 }
 
 var _default = Comments;
@@ -34410,11 +34434,11 @@ function Feeds() {
     form.reset();
   }
 
-  return /*#__PURE__*/_react.default.createElement("div", null, feed.map(function (post) {
-    return /*#__PURE__*/_react.default.createElement("div", {
+  return _react.default.createElement("div", null, feed.map(function (post) {
+    return _react.default.createElement("div", {
       className: "feeds",
       key: post.id
-    }, /*#__PURE__*/_react.default.createElement(_Post.default, {
+    }, _react.default.createElement(_Post.default, {
       post: post,
       key: post.id,
       id: post.id,
@@ -34425,13 +34449,13 @@ function Feeds() {
       postPic: post.postPic,
       like: post.like,
       postLike: post.postLike
-    }), /*#__PURE__*/_react.default.createElement("div", {
+    }), _react.default.createElement("div", {
       className: "comment-displayed"
     }, post.comments.map(function (comment) {
       var commentUserData = users.find(function (user) {
         return user.userId === comment.userId;
       });
-      return /*#__PURE__*/_react.default.createElement(_Comments.default, {
+      return _react.default.createElement(_Comments.default, {
         key: comment.id,
         id: comment.id,
         author: commentUserData.userName,
@@ -34439,25 +34463,25 @@ function Feeds() {
         authorText: comment.text,
         authorDate: comment.date
       });
-    })), /*#__PURE__*/_react.default.createElement("form", {
+    })), _react.default.createElement("form", {
       className: "comment-form",
       onSubmit: handleComment,
       id: post.id
-    }, /*#__PURE__*/_react.default.createElement("input", {
+    }, _react.default.createElement("input", {
       type: "text",
       placeholder: "Add a comment...",
       name: "comment",
       onChange: function onChange(e) {
         return e.currentTarget.value;
       }
-    }), /*#__PURE__*/_react.default.createElement("button", {
+    }), _react.default.createElement("button", {
       type: "submit",
       className: "post-comment"
-    }, /*#__PURE__*/_react.default.createElement("img", {
+    }, _react.default.createElement("img", {
       src: _sendComment.default,
       className: "comment-icon",
       alt: ""
-    }))), /*#__PURE__*/_react.default.createElement("hr", null));
+    }))), _react.default.createElement("hr", null));
   }));
 }
 
@@ -34512,20 +34536,20 @@ function AddPost() {
     form.reset();
   }
 
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return _react.default.createElement("div", {
     className: "new-post"
-  }, /*#__PURE__*/_react.default.createElement("h3", null, "New post :"), /*#__PURE__*/_react.default.createElement("form", {
+  }, _react.default.createElement("h3", null, "New post :"), _react.default.createElement("form", {
     className: "form-add",
     onSubmit: addNEwPost
-  }, /*#__PURE__*/_react.default.createElement("textarea", {
+  }, _react.default.createElement("textarea", {
     placeholder: "Say what\u2019s on your mind...",
     name: "description",
     onChange: function onChange(e) {
       return e.currentTarget.value;
     }
-  }), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("span", {
+  }), _react.default.createElement("label", null, _react.default.createElement("span", {
     className: "label-text"
-  }, "Picture url :"), /*#__PURE__*/_react.default.createElement("input", {
+  }, "Picture url :"), _react.default.createElement("input", {
     type: "url",
     placeholder: "Paste a URL here",
     name: "picture",
@@ -34533,7 +34557,7 @@ function AddPost() {
       return e.currentTarget.value;
     },
     required: true
-  })), /*#__PURE__*/_react.default.createElement("button", {
+  })), _react.default.createElement("button", {
     className: "post-button"
   }, "Post")));
 }
@@ -34608,25 +34632,25 @@ function User() {
     form.reset();
   }
 
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return _react.default.createElement("div", {
     className: "profile"
-  }, /*#__PURE__*/_react.default.createElement("p", null, "Options : "), /*#__PURE__*/_react.default.createElement("form", {
+  }, _react.default.createElement("p", null, "Options : "), _react.default.createElement("form", {
     className: "profile-form",
     onSubmit: handleIdentity
-  }, /*#__PURE__*/_react.default.createElement("label", null, "Username :", /*#__PURE__*/_react.default.createElement("input", {
+  }, _react.default.createElement("label", null, "Username :", _react.default.createElement("input", {
     type: "text",
     placeholder: "Type your username here",
     onChange: function onChange(e) {
       return setUserNewName(e.currentTarget.value);
     },
     required: true
-  })), /*#__PURE__*/_react.default.createElement("label", null, "Profile picture :", /*#__PURE__*/_react.default.createElement("input", {
+  })), _react.default.createElement("label", null, "Profile picture :", _react.default.createElement("input", {
     type: "url",
     placeholder: "Paste a URL here",
     onChange: function onChange(e) {
       return setUserNewPic(e.currentTarget.value);
     }
-  })), /*#__PURE__*/_react.default.createElement("button", null, "Save")));
+  })), _react.default.createElement("button", null, "Save")));
 }
 
 var _default = User;
@@ -34654,16 +34678,16 @@ var _User = _interopRequireDefault(require("./components/User"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function App() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Header.default, null), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  return _react.default.createElement("div", null, _react.default.createElement(_Header.default, null), _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/"
-  }, /*#__PURE__*/_react.default.createElement(_Feeds.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  }, _react.default.createElement(_Feeds.default, null)), _react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/post"
-  }, /*#__PURE__*/_react.default.createElement(_AddPost.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  }, _react.default.createElement(_AddPost.default, null)), _react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/user"
-  }, /*#__PURE__*/_react.default.createElement(_User.default, null))));
+  }, _react.default.createElement(_User.default, null))));
 }
 
 var _default = App;
@@ -34683,8 +34707,8 @@ var _reactRouterDom = require("react-router-dom");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom.default.render( /*#__PURE__*/_react.default.createElement(_DataContext.ContextProvider, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react.default.createElement(_App.default, null))), document.getElementById("root"));
-},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./App":"App.js","./DataContext":"DataContext.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+_reactDom.default.render(_react.default.createElement(_DataContext.ContextProvider, null, _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_App.default, null))), document.getElementById("root"));
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./App":"App.js","./DataContext":"DataContext.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -34712,7 +34736,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62740" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62353" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -34743,9 +34767,8 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
         assetsToAccept.forEach(function (v) {
           hmrAcceptRun(v[0], v[1]);
         });
-      } else if (location.reload) {
-        // `location` global exists in a web worker context but lacks `.reload()` function.
-        location.reload();
+      } else {
+        window.location.reload();
       }
     }
 
@@ -34888,5 +34911,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
 //# sourceMappingURL=/onjabook.e31bb0bc.js.map
